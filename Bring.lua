@@ -80,3 +80,18 @@ function bringRoda()
 	bl("Tyre", "Main")
 end
 
+function bringChair()
+	bl("Chair", "Part")
+end
+
+function bringBandage()
+	bl("Bandage", "Handle")
+end
+
+function bringCake()
+	bl("Cake", "Handle")
+end
+
+function bringArm1()
+	bl("Leather Body", "Main")
+end
