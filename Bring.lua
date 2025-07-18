@@ -43,7 +43,7 @@ function bringLog()
 	bl("Log", "Main")
 end
 
-function bringFan()
+function bringVentilador()
 	bl("Broken Fan", "Fans")
 end
 
@@ -53,4 +53,21 @@ end
 
 function bringSheetMetal()
 	bl("Sheet Metal", "Main")
+end
+
+function bringAmmo()
+	bl("Rifle Ammo", "Main")
+	bl("Revolver Ammo", "Main")
+end
+
+function bringRifle()
+	bl("Rifle", "Adorn")
+end
+
+function bringFuel()
+	bl("Fuel Canister", "Main")
+end
+
+function bringRadio()
+	bl("Old Radio", "Main")
 end
