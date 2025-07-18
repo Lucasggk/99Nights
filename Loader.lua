@@ -369,6 +369,7 @@ bring:AddButton({
     end
 })
 
+--
 
 tps:AddButton({
 	Title = "Teleport to center (fogo)",
@@ -376,4 +377,50 @@ tps:AddButton({
 	Callback = function() 
 		tpfire() 
 	end
+})
+
+local tv = {}
+function gp() local p=game.Players.LocalPlayer.Character.HumanoidRootPart.Position return ("%d, %d, %d"):format(p.X, p.Y, p.Z) end
+local tpd
+
+local Dropdown = tps:AddDropdown("Dropdown", {
+    Title = "Locais para teleport",
+    Description = "",
+    Values = tv,
+    Multi = false,
+    Default = nil,
+    Callback = function(v)
+	tpd = v
+    end
+})
+
+tps:AddButton({
+    Title = "Salvar novo local",
+    Description = "Adiciona nova posição no Dropdown",
+    Callback = function()
+        table.insert(tv, gp())
+        Dropdown:SetValues(tv)
+    end
+})
+
+tps:AddButton({
+    Title = "Limpar Locais salvos",
+    Description = "Limpa todas posições salva no Dropdown",
+    Callback = function()
+	tv = {}
+        Dropdown:SetValues(tv)
+    end
+})
+
+tps:AddButton({
+    Title = "Teleportar para posição selecionada",
+    Description = "",
+    Callback = function()
+        if tpd then
+            local x, y, z = tpd:match("(-?%d+), (-?%d+), (-?%d+)")
+            if x and y and z then
+                game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(tonumber(x), tonumber(y), tonumber(z))
+            end
+        end
+    end
 })
