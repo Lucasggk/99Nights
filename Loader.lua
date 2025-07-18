@@ -201,7 +201,8 @@ player:AddToggle("", {
 		if v then
 			task.spawn(function()
 				while manterVelocidade do
-					local h = game.Players.LocalPlayer.Character:FindFirstChild("Humanoid")
+					local char = game.Players.LocalPlayer.Character
+					local h = char and char:FindFirstChild("Humanoid")
 					if h and h.WalkSpeed < 30 then
 						h.WalkSpeed = 50
 					end
