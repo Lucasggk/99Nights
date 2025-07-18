@@ -370,6 +370,8 @@ bring:AddButton({
 })
 
 --
+tps:AddSection("Tps prontos")
+
 
 tps:AddButton({
 	Title = "Teleport to center (fogo)",
@@ -378,6 +380,10 @@ tps:AddButton({
 		tpfire() 
 	end
 })
+
+
+tps:AddSection("Tps Pos")
+
 
 local tv = {}
 function gp() local p=game.Players.LocalPlayer.Character.HumanoidRootPart.Position return ("%d, %d, %d"):format(p.X, p.Y, p.Z) end
