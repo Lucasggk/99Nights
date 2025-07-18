@@ -270,25 +270,29 @@ player:AddToggle("", {
 
 local itens = {
     "Ammo (Rev & Rif)",
-    "Leather Armor",
     "Bandage",
     "Berry",
     "Bolt",
+    "Broken Fan",
+    "Broken Microwave",
     "Cake",
     "Carrot",
     "Chair",
     "Coal",
     "Coin Stack",
-    "Old Flashlight",
     "Fuel Canister",
+    "Iron Body",
+    "Leather Armor",
     "Log",
-    "Broken Microwave",
+    "MedKit",
+    "Oil Barrel",
+    "Old Car Engine",
+    "Old Flashlight",
     "Old Radio",
-    "Tyre",
-    "Sheet Metal",
-    "Broken Fan",
     "Revolver",
-    "Rifle"
+    "Rifle",
+    "Sheet Metal",
+    "Tyre"
 }
 
 local selectedItem
@@ -311,14 +315,16 @@ bring:AddButton({
     Callback = function()
         if selectedItem == "Ammo (Rev & Rif)" then
             bringAmmo()
-        elseif selectedItem == "Leather Armor" then
-            bringArm1()
         elseif selectedItem == "Bandage" then
             bringBandage()
         elseif selectedItem == "Berry" then
             bringBerry()
         elseif selectedItem == "Bolt" then
             bringBolt()
+        elseif selectedItem == "Broken Fan" then
+            bringVentilador()
+        elseif selectedItem == "Broken Microwave" then
+            bringMicro()
         elseif selectedItem == "Cake" then
             bringCake()
         elseif selectedItem == "Carrot" then
@@ -329,28 +335,32 @@ bring:AddButton({
             bringCoal()
         elseif selectedItem == "Coin Stack" then
             bringCoin()
-        elseif selectedItem == "Old Flashlight" then
-            bringFlashOld()
         elseif selectedItem == "Fuel Canister" then
             bringFuel()
+        elseif selectedItem == "Iron Body" then
+            bringArm2()
+        elseif selectedItem == "Leather Armor" then
+            bringArm1()
         elseif selectedItem == "Log" then
             bringLog()
-        elseif selectedItem == "Broken Microwave" then
-            bringMicro()
+        elseif selectedItem == "MedKit" then
+            bringMedKit()
+        elseif selectedItem == "Oil Barrel" then
+            bringBarril()
+        elseif selectedItem == "Old Car Engine" then
+            bringEngine()
+        elseif selectedItem == "Old Flashlight" then
+            bringFlashOld()
         elseif selectedItem == "Old Radio" then
             bringRadio()
-        elseif selectedItem == "Tyre" then
-            bringRoda()
-        elseif selectedItem == "Sheet Metal" then
-            bringSheetMetal()
-        elseif selectedItem == "Broken Fan" then
-            bringVentilador()
         elseif selectedItem == "Revolver" then
             bringRevolver()
         elseif selectedItem == "Rifle" then
             bringRifle()
-        else
-            print("")
+        elseif selectedItem == "Sheet Metal" then
+            bringSheetMetal()
+        elseif selectedItem == "Tyre" then
+            bringRoda()
         end
     end
 })
