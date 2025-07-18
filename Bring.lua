@@ -11,3 +11,12 @@ function bl(nome, parte)
 		end
 	end
 end
+
+function bringBerry()
+	bl("Berry", "Handle")
+end
+
+
+function bringBolt()
+	bl("Bolt", "main")
+end
