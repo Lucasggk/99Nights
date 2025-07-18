@@ -373,7 +373,7 @@ bring:AddButton({
     end
 })
 
-bring:AddSection("Auto Bring")
+bring:AddSection("Auto Bring - Combustíveis/Fogo")
 
 local abff = false
 bring:AddToggle("", {
@@ -398,10 +398,31 @@ bring:AddButton({
 	Description = "Mesma função do Toggle porem ele so bring 1 vez por click\nE não automaticamente",
 	Callback = function() blmCom() end})
 					
-bring:AddParagraph({
-    Title = "Em breve coloco mais 😒😕",
-    Content = "MADE BY LUCAS @LUCAS_KOE"
+bring:AddSection("Auto Bring - Metais")
+
+local abfg = false
+bring:AddToggle("", {
+	Title = "Auto Bring Metais",
+	Description = "puxa tudo que é metal para trás da bancada de trabalho",
+	Default = false,
+	Callback = function(l)
+		abfg = l
+		if abfg then
+			task.spawn(function()
+				while abfg do
+					task.wait(0.01)
+					blmMet()
+				end
+			end)
+		end
+	end
 })
+
+bring:AddButton({
+	Title = "Auto Bring metais (Manual)", 
+	Description = "Mesma função do Toggle porem ele so bring 1 vez por click\nE não automaticamente",
+	Callback = function() blmCom() end})
+
        
 
 
