@@ -187,12 +187,13 @@ player:AddButton({
 
 
 
+local manterVelocidade = false
 player:AddToggle("", {
 	Title = "Nunca manter velocidade abaixo de 30",
 	Description = "",
 	Default = false,
 	Callback = function(v)
-		local manterVelocidade = v
+		manterVelocidade = v
 		if v then
 			task.spawn(function()
 				while manterVelocidade do
