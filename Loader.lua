@@ -286,7 +286,9 @@ local itens = {
     "Old Radio",
     "Tyre",
     "Sheet Metal",
-    "Broken Fan"
+    "Broken Fan",
+    "Revolver",
+    "Rifle"
 }
 
 local selectedItem
@@ -343,7 +345,11 @@ bring:AddButton({
             bringSheetMetal()
         elseif selectedItem == "Broken Fan" then
             bringVentilador()
-	else
+        elseif selectedItem == "Revolver" then
+            bringRevolver()
+        elseif selectedItem == "Rifle" then
+            bringRifle()
+        else
             print("")
         end
     end
