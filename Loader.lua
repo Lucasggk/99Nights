@@ -261,3 +261,90 @@ player:AddToggle("", {
 		end
 	end
 })
+
+--
+
+
+
+
+
+local itens = {
+    "Ammo (Rev & Rif)",
+    "Leather Armor",
+    "Bandage",
+    "Berry",
+    "Bolt",
+    "Cake",
+    "Carrot",
+    "Chair",
+    "Coal",
+    "Coin Stack",
+    "Old Flashlight",
+    "Fuel Canister",
+    "Log",
+    "Broken Microwave",
+    "Old Radio",
+    "Tyre",
+    "Sheet Metal",
+    "Broken Fan"
+}
+
+local selectedItem
+
+local bringdrop = bring:AddDropdown("Dropdown", {
+    Title = "Item que ele traz",
+    Description = "Escolha o item que o bring traz",
+    Values = itens,
+    Multi = false,
+    Default = nil,
+})
+
+bringdrop:OnChanged(function(value)
+    selectedItem = value
+end)
+
+bring:AddButton({
+    Title = "Bring traz o item",
+    Description = "Faz o bring trazer o item selecionado",
+    Callback = function()
+        if selectedItem == "Ammo (Rev & Rif)" then
+            bringAmmo()
+        elseif selectedItem == "Leather Armor" then
+            bringArm1()
+        elseif selectedItem == "Bandage" then
+            bringBandage()
+        elseif selectedItem == "Berry" then
+            bringBerry()
+        elseif selectedItem == "Bolt" then
+            bringBolt()
+        elseif selectedItem == "Cake" then
+            bringCake()
+        elseif selectedItem == "Carrot" then
+            bringCarrot()
+        elseif selectedItem == "Chair" then
+            bringChair()
+        elseif selectedItem == "Coal" then
+            bringCoal()
+        elseif selectedItem == "Coin Stack" then
+            bringCoin()
+        elseif selectedItem == "Old Flashlight" then
+            bringFlashOld()
+        elseif selectedItem == "Fuel Canister" then
+            bringFuel()
+        elseif selectedItem == "Log" then
+            bringLog()
+        elseif selectedItem == "Broken Microwave" then
+            bringMicro()
+        elseif selectedItem == "Old Radio" then
+            bringRadio()
+        elseif selectedItem == "Tyre" then
+            bringRoda()
+        elseif selectedItem == "Sheet Metal" then
+            bringSheetMetal()
+        elseif selectedItem == "Broken Fan" then
+            bringVentilador()
+	else
+            print("")
+        end
+    end
+})
