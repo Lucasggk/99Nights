@@ -154,6 +154,8 @@ local player = Window:AddTab({ Title = "User", Icon = "user" })
 
 -- script: Script 
 
+player:AddSection("WalkSpeed")
+
 player:AddButton({
 	Title = "Speed Button",
 	Description = "Cria botão que altera a velocidade entre 30 ou 100",
@@ -205,8 +207,7 @@ player:AddToggle("", {
 	end
 })
 
-
-
+player:AddSection("Jump")
 
 player:AddToggle("", {
 	Title = "Infinite Jump",
