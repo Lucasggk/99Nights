@@ -191,3 +191,20 @@ player:AddButton({
 	end
 })
 
+
+
+player:AddToggle("", {
+	Title = "Infinite Jump",
+	Description = "Auto se explica",
+	Default = false,
+	Callback = function(v)
+		if v then
+			_G.InfJump = game:GetService("UserInputService").JumpRequest:Connect(function()
+				local h = game.Players.LocalPlayer.Character and game.Players.LocalPlayer.Character:FindFirstChildOfClass("Humanoid")
+				if h then h:ChangeState(Enum.HumanoidStateType.Jumping) end
+			end)
+		else
+			if _G.InfJump then _G.InfJump:Disconnect() _G.InfJump = nil end
+		end
+	end
+})
