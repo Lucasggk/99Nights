@@ -42,3 +42,15 @@ end
 function bringLog()
 	bl("Log", "Main")
 end
+
+function bringFan()
+	bl("Broken Fan", "Fans")
+end
+
+function bringFlashOld()
+	bl("Old Flashlight", "Bulb")
+end
+
+function bringSheetMetal()
+	bl("Sheet Metal", "Main")
+end
