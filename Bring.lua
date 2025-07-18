@@ -64,6 +64,9 @@ function bringRifle()
 	bl("Rifle", "Adorn")
 end
 
+function bringRevolver()
+	bl("Revolver", "Adorn")
+
 function bringFuel()
 	bl("Fuel Canister", "Main")
 end
