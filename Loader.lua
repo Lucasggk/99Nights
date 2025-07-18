@@ -382,13 +382,18 @@ bring:AddToggle("", {
 		if abff then
 			task.spawn(function()
 				while abff do
-					task.wait(0.25)
+					task.wait(0.01)
 					blmCom()
 				end
 			end)
 		end
 	end
 })
+
+bring:AddButton({
+	Title = "Auto Bring Combustíveis (Manual)", 
+	Description = "Mesma função do Toggle porem ele so bring 1 vez por click\nE não automaticamente",
+	Callback = function() blmCom() end})
 					
 bring:AddParagraph({
     Title = "Em breve coloco mais 😒😕",
