@@ -382,7 +382,7 @@ bring:AddToggle("", {
 		if abff then
 			task.spawn(function()
 				while abff do
-					task.wait(0.1)
+					task.wait(0.25)
 					blmCom()
 				end
 			end)
@@ -392,7 +392,7 @@ bring:AddToggle("", {
 					
 bring:AddParagraph({
     Title = "Em breve coloco mais 😒😕",
-    Content = ""
+    Content = "MADE BY LUCAS @LUCAS_KOE"
 })
        
 
