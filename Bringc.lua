@@ -27,3 +27,16 @@ function blmCom()
 	blm("Fuel Canister", "Main", "-30, 4, -0")
 	blm("Chair", "Part", "-39, 4, -0")
 end
+
+function blmMet()
+	blm("Old Car Engine", "Main", "35, 4, 19")
+	blm("Bolt", "Main", "41, 4, 12")
+	blm("Broken Fan", "Fans", "42, 4, 3")
+	blm("Sheet Metal", "Main", "40, 4, -11")
+	blm("Old Radio", "Main", "31, 4, -20")
+	blm("Broken Microwave", "Main", "30, 4, -1")
+	blm("Tyre", "Main", "55, 4, -1")
+	blm("Metal Chair", "Part", "51, 4, 13")
+        blm("Washing Machine", "Main", "54, 4, -19")
+end
+
