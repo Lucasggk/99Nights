@@ -239,7 +239,7 @@ player:AddButton({
 	Title = "Aplicar Pulo",
 	Description = "Define o valor do pulo",
 	Callback = function()
-		game.Players.LocalPlayer.Character.Humanoid:SetAttribute("UseJumpPower", true)
+		game.Players.LocalPlayer.Character.Humanoid.UseJumpPower = true
 		game.Players.LocalPlayer.Character.Humanoid.JumpPower = jumpPower
 	end
 })
