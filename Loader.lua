@@ -3,6 +3,7 @@ repeat task.wait() until game.Players.LocalPlayer:FindFirstChild("PlayerGui")
 
 loadstring(game:HttpGet("https://raw.githubusercontent.com/Lucasggk/BlueLock/refs/heads/main/Fix.name.ui.lua"))()
 loadstring(game:HttpGet("https://raw.githubusercontent.com/Lucasggk/99Nights/main/Bring.lua"))()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/Lucasggk/99Nights/main/Bringc.lua"))()
 
 local Fluent = loadstring(game:HttpGet("https://github.com/dawid-scripts/Fluent/releases/latest/download/main.lua"))()
 
@@ -368,6 +369,33 @@ bring:AddButton({
         end
     end
 })
+
+bring:AddSection("Auto Bring")
+
+local abff = false
+bring:AddToggle("", {
+	Title = "Auto Bring Combustíveis",
+	Description = "puxa tudo que e possivel queimar para um pouco a frente do fogo",
+	Default = false,
+	Callback = function(l)
+		abff = l
+		if abff then
+			task.spawn(function()
+				while abff do
+					task.wait(0.1)
+					blmCom()
+				end
+			end)
+		end
+	end
+})
+					
+bring:AddParagraph({
+    Title = "Em breve coloco mais 😒😕",
+    Content = ""
+})
+       
+
 
 --
 tps:AddSection("Tps prontos")
