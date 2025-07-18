@@ -376,18 +376,21 @@ bring:AddButton({
 bring:AddSection("Auto Bring - Combustíveis/Fogo")
 
 local abff = false
+local abffThread = nil
+
 bring:AddToggle("", {
 	Title = "Auto Bring Combustíveis",
 	Description = "puxa tudo que e possivel queimar para um pouco a frente do fogo",
 	Default = false,
 	Callback = function(l)
 		abff = l
-		if abff then
-			task.spawn(function()
+		if abff and not abffThread then
+			abffThread = task.spawn(function()
 				while abff do
 					task.wait(0.01)
 					blmCom()
 				end
+				abffThread = nil
 			end)
 		end
 	end
@@ -401,18 +404,21 @@ bring:AddButton({
 bring:AddSection("Auto Bring - Metais")
 
 local abfg = false
+local abfgThread = nil
+
 bring:AddToggle("", {
 	Title = "Auto Bring Metais",
 	Description = "puxa tudo que é metal para trás da bancada de trabalho",
 	Default = false,
 	Callback = function(l)
 		abfg = l
-		if abfg then
-			task.spawn(function()
+		if abfg and not abfgThread then
+			abfgThread = task.spawn(function()
 				while abfg do
 					task.wait(0.01)
 					blmMet()
 				end
+				abfgThread = nil
 			end)
 		end
 	end
