@@ -149,8 +149,11 @@ end)
 
 
 
--- script:
+-- script: tabs
 local player = Window:AddTab({ Title = "User", Icon = "user" })
+
+-- script: Script 
+
 player:AddButton({
 	Title = "Speed Button",
 	Description = "Cria botão que altera a velocidade entre 30 ou 100",
@@ -177,19 +180,31 @@ player:AddButton({
 			h().WalkSpeed = v
 			b.Text = ("vel: ".. v)
 		end)
-
-		task.spawn(function()
-			while true do
-				task.wait(0.05)
-				local h = game.Players.LocalPlayer.Character:FindFirstChild("Humanoid")
-				if h and h.WalkSpeed < 29 then
-					h.WalkSpeed = 100
-					b.Text = ("vel: ".. h.WalkSpeed)
-				end
-			end
-		end)
 	end
 })
+
+
+
+player:AddToggle("", {
+	Title = "Nunca manter velocidade abaixo de 30",
+	Description = "",
+	Default = false,
+	Callback = function(v)
+		local manterVelocidade = v
+		if v then
+			task.spawn(function()
+				while manterVelocidade do
+					local h = game.Players.LocalPlayer.Character:FindFirstChild("Humanoid")
+					if h and h.WalkSpeed < 30 then
+						h.WalkSpeed = 30.1
+					end
+					task.wait(0.25)
+				end
+			end)
+		end
+	end
+})
+
 
 
 
