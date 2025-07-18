@@ -98,3 +98,11 @@ end
 function bringArm1()
 	bl("Leather Body", "Main")
 end
+
+function tpfire()
+	(game.Players.LocalPlayer.Character or game.Players.LocalPlayer.CharacterAdded:Wait()):WaitForChild("HumanoidRootPart").CFrame =
+CFrame.new(0.43132782, 35.77634621, -1.88620758, -0.270917892, 0.102997094, 0.957076371, 0.639657021, 0.762253821, 0.0990355015, -0.719334781, 0.639031112, -0.272391081)
+end
+
+
+
