@@ -150,4 +150,44 @@ end)
 
 
 -- script:
+local player = Window:AddTab({ Title = "User", Icon = "user" })
+player:AddButton({
+	Title = "Speed Button",
+	Description = "Cria botão que altera a velocidade entre 30 ou 100",
+	Callback = function(v)
+		local p = game:GetService("Players").LocalPlayer
+		local g = p:WaitForChild("PlayerGui")
+		local s = g:FindFirstChild("SpeedGui") or Instance.new("ScreenGui", g)
+		s.Name = "SpeedGui"
+		s.ResetOnSpawn = false
+		local b = Instance.new("TextButton", s)
+		b.Size = UDim2.new(0, 60, 0, 60)
+		b.Position = UDim2.new(0, 10, 0, 10)
+		b.BackgroundColor3 = Color3.fromRGB(80, 80, 80)
+		b.Text = "WalkSpeed"
+		b.Draggable = true
+		b.Active = true
+		local v = 30
+		local function h()
+			return (p.Character or p.CharacterAdded:Wait()):WaitForChild("Humanoid")
+		end
+		h().WalkSpeed = v
+		b.MouseButton1Click:Connect(function()
+			v = (v == 30) and 100 or 30
+			h().WalkSpeed = v
+			b.Text = ("vel: ".. v)
+		end)
+
+		task.spawn(function()
+			while true do
+				task.wait(0.05)
+				local h = game.Players.LocalPlayer.Character.Humanoid
+				if h.WalkSpeed < 30 then
+					h.WalkSpeed = 100
+					b.Text = ("vel: "h.. .WalkSpeed)
+				end
+			end
+		end)
+	end
+})
 
