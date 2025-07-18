@@ -287,6 +287,7 @@ local itens = {
     "Leather Armor",
     "Log",
     "MedKit",
+    "Metal Chair",
     "Oil Barrel",
     "Old Car Engine",
     "Old Flashlight",
@@ -366,6 +367,8 @@ bring:AddButton({
             bringRoda()
 	elseif selectedItem == "Washing Machine" then
 	    bringLavar()
+	elseif selectedItem == "Metal Chair" then
+	    bringMChair()
         end
     end
 })
