@@ -103,6 +103,10 @@ function bringChair()
 	bl("Chair", "Part")
 end
 
+function bringMChair()
+	bl("Metal Chair", "Part")
+end
+
 function bringBandage()
 	bl("Bandage", "Handle")
 end
