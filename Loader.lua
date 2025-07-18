@@ -239,7 +239,8 @@ player:AddButton({
 	Title = "Aplicar Pulo",
 	Description = "Define o valor do pulo",
 	Callback = function()
-		local char = game.Players.LocalPlayer.Character or game.Players.LocalPlayer.CharacterAdded:Wait()
+		local p = game.Players.LocalPlayer
+		local char = p.Character or p.CharacterAdded:Wait()
 		local h = char:FindFirstChild("Humanoid")
 		if h then
 			h.JumpPower = jumpPower
