@@ -210,6 +210,40 @@ player:AddToggle("", {
 
 player:AddSection("Jump")
 
+local jumpPower = 50
+
+local Input = player:AddInput("JumpInput", {
+	Title = "Pulo",
+	Description = "Digite o valor do pulo (50 a 200)",
+	Default = "50",
+	Placeholder = "Ex: 100",
+	Numeric = true,
+	Finished = true,
+	Callback = function(v)
+		local n = tonumber(v)
+		if not n then return end
+		if n < 50 then
+			jumpPower = 50
+			Input:SetValue("50")
+		elseif n > 200 then
+			jumpPower = 200
+			Input:SetValue("200")
+		else
+			jumpPower = n
+		end
+	end
+})
+
+player:AddButton({
+	Title = "Aplicar Pulo",
+	Description = "Define o valor do pulo",
+	Callback = function()
+		local h = game.Players.LocalPlayer.Character:FindFirstChild("Humanoid")
+		if h then h.JumpPower = jumpPower end
+	end
+})
+
+
 player:AddToggle("", {
 	Title = "Infinite Jump",
 	Description = "Auto se explica",
