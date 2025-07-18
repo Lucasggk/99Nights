@@ -26,4 +26,8 @@ end
 
 function blmCom()
   blm("Log", "Main", "-63, 3, -6")
-  
+  blm("Oil Barrel", "Main", "-63, 3, -6")
+  blm("Coal", "Coal", "-63, 3, -6")
+  blm("Fuel Canister", "Main", "-63, 3, -6")
+  blm("Chair", "Part", "-63, 3, -6")
+end
