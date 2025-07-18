@@ -39,7 +39,7 @@ function bringArm2()
 end
 
 function bringBolt()
-	bl("Bolt", "main")
+	bl("Bolt", "Main")
 end
 
 function bringCoal()
