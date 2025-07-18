@@ -293,7 +293,8 @@ local itens = {
     "Revolver",
     "Rifle",
     "Sheet Metal",
-    "Tyre"
+    "Tyre",
+    "Washing Machine"
 }
 
 local selectedItem
@@ -362,6 +363,8 @@ bring:AddButton({
             bringSheetMetal()
         elseif selectedItem == "Tyre" then
             bringRoda()
+	elseif selectedItem == "Washing Machine" then
+	    bringLavar()
         end
     end
 })
