@@ -6,7 +6,7 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/Lucasggk/BlueLock/ref
 local Fluent = loadstring(game:HttpGet("https://github.com/dawid-scripts/Fluent/releases/latest/download/main.lua"))()
 
 local Window = Fluent:CreateWindow({
-    Title = "99 Nights In The Forest|",
+    Title = "99 Nights In The Forest |",
     SubTitle = "by Lucas",
     TabWidth = 180,
     Size = UDim2.fromOffset(600, 350),
@@ -181,10 +181,10 @@ player:AddButton({
 		task.spawn(function()
 			while true do
 				task.wait(0.05)
-				local h = game.Players.LocalPlayer.Character.Humanoid
-				if h.WalkSpeed < 30 then
+				local h = game.Players.LocalPlayer.Character:FindFirstChild("Humanoid")
+				if h and h.WalkSpeed < 29 then
 					h.WalkSpeed = 100
-					b.Text = ("vel: "h.. .WalkSpeed)
+					b.Text = ("vel: ".. h.WalkSpeed)
 				end
 			end
 		end)
