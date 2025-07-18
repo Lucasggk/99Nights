@@ -71,3 +71,12 @@ end
 function bringRadio()
 	bl("Old Radio", "Main")
 end
+
+function bringMicro()
+	bl("Broken Microwave", "Main")
+end
+
+function bringRoda()
+	bl("Tyre", "Main")
+end
+
