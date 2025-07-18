@@ -153,6 +153,7 @@ end)
 -- script: tabs
 local player = Window:AddTab({ Title = "User", Icon = "user" })
 local bring = Window:AddTab({ Title = "Brings", Icon = "" })
+local tps = Window:AddTab({ Title = "Teleports", Icon = "" })
 
 -- script: Script 
 
@@ -363,4 +364,13 @@ bring:AddButton({
             bringRoda()
         end
     end
+})
+
+
+tps:AddButton({
+	Title = "Teleport to center (fogo)",
+	Description = "Ao clicar te Teleporta para o fogo",
+	Callback = function() 
+		tpfire() 
+	end
 })
