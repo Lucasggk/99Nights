@@ -21,17 +21,10 @@ function blm(nome, caminho, pos)
 end
 
 function blmCom()
-	blm("Log", "Main", "-63, 3, -6")
-	blm("Oil Barrel", "Main", "-63, 3, -6")
-	blm("Coal", "Coal", "-63, 3, -6")
-	blm("Fuel Canister", "Main", "-63, 3, -6")
-	blm("Chair", "Part", "-63, 3, -6")
+	blm("Log", "Main", "-18, 4, 0")
+	blm("Oil Barrel", "Main", "-14, 4, 0")
+	blm("Coal", "Coal", "-22, 4, 0")
+	blm("Fuel Canister", "Main", "-26, 4, 0")
+	blm("Chair", "Part", "-30, 4, 0")
 end
 
-function blmCom()
-  blm("Log", "Main", "-63, 3, -6")
-  blm("Oil Barrel", "Main", "-63, 3, -6")
-  blm("Coal", "Coal", "-63, 3, -6")
-  blm("Fuel Canister", "Main", "-63, 3, -6")
-  blm("Chair", "Part", "-63, 3, -6")
-end
