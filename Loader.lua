@@ -388,7 +388,7 @@ bring:AddToggle("", {
 		if abff and not abffThread then
 			abffThread = task.spawn(function()
 				while abff do
-					task.waitblmM3)
+					task.wait(0.3)
 					blmCom()
 				end
 				abffThread = nil
