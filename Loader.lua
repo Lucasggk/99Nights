@@ -2,6 +2,7 @@ repeat task.wait() until game:IsLoaded()
 repeat task.wait() until game.Players.LocalPlayer:FindFirstChild("PlayerGui") 
 
 loadstring(game:HttpGet("https://raw.githubusercontent.com/Lucasggk/BlueLock/refs/heads/main/Fix.name.ui.lua"))()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/Lucasggk/99Nights/main/Bring.lua"))()
 
 local Fluent = loadstring(game:HttpGet("https://github.com/dawid-scripts/Fluent/releases/latest/download/main.lua"))()
 
@@ -151,6 +152,7 @@ end)
 
 -- script: tabs
 local player = Window:AddTab({ Title = "User", Icon = "user" })
+local bring = Window:AddTab({ Title = "Brings", Icon = "" })
 
 -- script: Script 
 
