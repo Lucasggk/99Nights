@@ -428,7 +428,7 @@ bring:AddToggle("", {
 bring:AddButton({
 	Title = "Auto Bring metais (Manual)", 
 	Description = "Mesma função do Toggle porem ele so bring 1 vez por click\nE não automaticamente",
-	Callback = function() blmCom() end})
+	Callback = function() blmMet() end})
 
        
 
