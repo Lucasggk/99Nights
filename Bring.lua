@@ -22,6 +22,21 @@ function bringBerry()
 	bl("Berry", "Handle")
 end
 
+function bringEngine()
+	bl("Old Car Engine", "Main")
+end
+
+function bringBarril()
+	bl("Oil Barrel", "Main")
+end
+
+function bringMedKit()
+	bl("MedKit", "Handle")
+end
+
+function bringArm2()
+	bl("Iron Body", "Main")
+end
 
 function bringBolt()
 	bl("Bolt", "main")
