@@ -190,7 +190,7 @@ player:AddButton({
 local manterVelocidade = false
 player:AddToggle("", {
 	Title = "Nunca manter velocidade abaixo de 30",
-	Description = "",
+	Description = "Caso cair em uma trap velocidade não reduz",
 	Default = false,
 	Callback = function(v)
 		manterVelocidade = v
@@ -215,7 +215,7 @@ local jumpPower = 50
 local Input = player:AddInput("JumpInput", {
 	Title = "Pulo",
 	Description = "Digite o valor do pulo (50 a 200)",
-	Default = "50",
+	Default = 50,
 	Placeholder = "Ex: 100",
 	Numeric = true,
 	Finished = true,
@@ -224,10 +224,10 @@ local Input = player:AddInput("JumpInput", {
 		if not n then return end
 		if n < 50 then
 			jumpPower = 50
-			Input:SetValue("50")
+			Input:SetValue(50)
 		elseif n > 200 then
 			jumpPower = 200
-			Input:SetValue("200")
+			Input:SetValue(200)
 		else
 			jumpPower = n
 		end
