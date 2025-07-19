@@ -596,8 +596,8 @@ esp:AddButton({
 	end
 })
 
-_G.aae = false
 
+_G.aae = false
 esp:AddToggle("", {
     Title = "Auto add esp", 
     Description = "Adiciona ESP automaticamente aos itens e mobs spawnados",
