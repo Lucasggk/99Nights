@@ -6,7 +6,7 @@ for _, url in ipairs{
 	"https://raw.githubusercontent.com/Lucasggk/99Nights/main/Bring.lua",
 	"https://raw.githubusercontent.com/Lucasggk/99Nights/main/Bringc.lua",
 	"https://raw.githubusercontent.com/Lucasggk/99Nights/main/Esp.lua",
-	"https://raw.githubusercontent.com/Lucasggk/99Nights/refs/heads/main/No%20void.lua"
+	"https://raw.githubusercontent.com/Lucasggk/99Nights/main/No%20void.lua"
 } do
 	loadstring(game:HttpGet(url, true))()
 end
