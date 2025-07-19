@@ -5,6 +5,7 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/Lucasggk/BlueLock/ref
 loadstring(game:HttpGet("https://raw.githubusercontent.com/Lucasggk/99Nights/main/Bring.lua"))()
 loadstring(game:HttpGet("https://raw.githubusercontent.com/Lucasggk/99Nights/main/Bringc.lua"))()
 loadstring(game:HttpGet("https://raw.githubusercontent.com/Lucasggk/99Nights/main/Esp.lua"))()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/Lucasggk/99Nights/refs/heads/main/No%20void.lua"))()
 
 local Fluent = loadstring(game:HttpGet("https://github.com/dawid-scripts/Fluent/releases/latest/download/main.lua"))()
 
