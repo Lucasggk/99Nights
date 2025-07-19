@@ -712,10 +712,31 @@ Combat:AddParagraph({
 
 --
 
-function wiki(nome) local c=0; for _,i in ipairs(workspace.Items:GetChildren()) do if i.Name==nome then c=c+1 end end; return c end
-function ghn() return math.floor(game:GetService("Players").LocalPlayer.PlayerGui.Interface.StatBars.HungerBar.Bar.Size.X.Scale * 100) end
-function feed(nome) game:GetService("ReplicatedStorage").RemoteEvents.RequestConsumeItem:InvokeServer(workspace.Items[nome]) end
-function notifeed(nome) Fluent:Notify({Title="Auto feed pause",Content="Sem '"..nome.."' Spawnado para consumo, Selecione outra comida",Duration=3}) end
+function wiki(nome)
+    local c = 0
+    for _, i in ipairs(workspace.Items:GetChildren()) do
+        if i.Name == nome then
+            c = c + 1
+        end
+    end
+    return c
+end
+
+function ghn()
+    return math.floor(game:GetService("Players").LocalPlayer.PlayerGui.Interface.StatBars.HungerBar.Bar.Size.X.Scale * 100)
+end
+
+function feed(nome)
+    game:GetService("ReplicatedStorage").RemoteEvents.RequestConsumeItem:InvokeServer(workspace.Items[nome])
+end
+
+function notifeed(nome)
+    Fluent:Notify({
+        Title = "Auto feed pause",
+        Content = "Sem '" .. nome .. "' Spawnado para consumo, Selecione outra comida",
+        Duration = 3
+    })
+end
 
 local vf, ife, tfe
 local tf = false
@@ -740,7 +761,9 @@ survival:AddDropdown("", {
     Values = alimentos,
     Multi = false,
     Default = "Carrot",
-    Callback = function(value) c = value end
+    Callback = function(value)
+        c = value
+    end
 })
 
 task.spawn(function()
@@ -759,11 +782,16 @@ ife = survival:AddInput("", {
     Default = 75,
     Placeholder = "",
     Numeric = true,
-    Finished = false, 
+    Finished = false,
     Callback = function(Value)
         vf = tonumber(Value) or 75
-        if vf < 0 then vf = 1 ife:SetValue(vf)
-        elseif vf > 100 then vf = 100 ife:SetValue(vf) end
+        if vf < 0 then
+            vf = 1
+            ife:SetValue(vf)
+        elseif vf > 100 then
+            vf = 100
+            ife:SetValue(vf)
+        end
     end
 })
 
@@ -777,8 +805,14 @@ tfe = survival:AddToggle("", {
             task.spawn(function()
                 while tf do
                     task.wait(0.075)
-                    if wiki(c) == 0 then tfe:SetValue(false) notifeed(c) break end
-                    if ghn() <= vf then feed(c) end
+                    if wiki(c) == 0 then
+                        tfe:SetValue(false)
+                        notifeed(c)
+                        break
+                    end
+                    if ghn() <= vf then
+                        feed(c)
+                    end
                 end
             end)
         end
@@ -788,10 +822,11 @@ tfe = survival:AddToggle("", {
 survival:AddSection("Auto Cook meat")
 
 survival:AddButton({
-	Title = "cozinhar carnes",
-	Description = "Cozinha todas carnes cru e teleport para você",
-	Callback = function()
-		blmMeat()
-		task.wait(0.1)
-		BringMeat()
-		end})
+    Title = "cozinhar carnes",
+    Description = "Cozinha todas carnes cru e teleport para você",
+    Callback = function()
+        blmMeat()
+        task.wait(0.5)
+        BringMeat()
+    end
+})
