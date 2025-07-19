@@ -21,11 +21,11 @@ function blm(nome, caminho, pos)
 end
 
 function blmCom()
-	blm("Coal", "Coal", "-15, 4, 0")
-	blm("Oil Barrel", "Main", "-9, 4, -15")
-	blm("Log", "Main", "-7, 4, 14")
-	blm("Fuel Canister", "Main", "-30, 4, -0")
-	blm("Chair", "Part", "-39, 4, -0")
+	blm("Coal", "Coal", "0.43132782, 7, -1.88620758")
+	blm("Oil Barrel", "Main", "0.43132782, 7, -1.88620758")
+	blm("Log", "Main", "0.43132782, 7, -1.88620758")
+	blm("Fuel Canister", "Main", "0.43132782, 7, -1.88620758")
+	blm("Chair", "Part", "0.43132782, 7, -1.88620758")
 end
 
 function blmMet()
