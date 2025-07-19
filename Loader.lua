@@ -727,7 +727,13 @@ function ghn()
 end
 
 function feed(nome)
-    game:GetService("ReplicatedStorage").RemoteEvents.RequestConsumeItem:InvokeServer(workspace.Items[nome])
+    local items = workspace.Items:GetChildren()
+    for _, item in ipairs(items) do
+        if item.Name == nome then
+            game:GetService("ReplicatedStorage").RemoteEvents.RequestConsumeItem:InvokeServer(item)
+            break
+        end
+    end
 end
 
 function notifeed(nome)
@@ -750,9 +756,8 @@ local alimentos = {
     "Cooked Steak"
 }
 local c = "Carrot"
-
+vf = 75
 survival:AddSection("Auto feed")
-
 survival:AddDropdown("", {
     Title = "Escolha a comida",
     Description = "Selecione o alimento para auto feed",
@@ -763,7 +768,6 @@ survival:AddDropdown("", {
         c = value
     end
 })
-
 task.spawn(function()
     local a = survival:AddParagraph({ Title = "fome:", Content = ghn() })
     local b = survival:AddParagraph({ Title = "Comida selecionada:", Content = c })
@@ -773,11 +777,10 @@ task.spawn(function()
         b:SetDesc(c)
     end
 end)
-
 ife = survival:AddInput("", {
     Title = "Feed %",
     Description = "Quando fome atingir (X%) Comer",
-    Default = 75,
+    Default = vf,
     Placeholder = "",
     Numeric = true,
     Finished = false,
@@ -792,7 +795,6 @@ ife = survival:AddInput("", {
         end
     end
 })
-
 tfe = survival:AddToggle("", {
     Title = "Ativar auto feed",
     Description = "Auto se explica",
@@ -801,6 +803,7 @@ tfe = survival:AddToggle("", {
         tf = v
         if tf then
             task.spawn(function()
+                local fomeAnterior = 100
                 while tf do
                     task.wait(0.075)
                     if wiki(c) == 0 then
@@ -808,9 +811,11 @@ tfe = survival:AddToggle("", {
                         notifeed(c)
                         break
                     end
-                    if ghn() <= vf then
+                    local fomeAtual = ghn()
+                    if fomeAtual <= vf and fomeAtual < fomeAnterior then
                         feed(c)
                     end
+                    fomeAnterior = fomeAtual
                 end
             end)
         end
@@ -824,7 +829,7 @@ survival:AddButton({
     Description = "Cozinha todas carnes cru e teleport para você",
     Callback = function()
         blmMeat()
-        task.wait(0.5)
+        task.wait(2)
         BringMeat()
     end
 })
