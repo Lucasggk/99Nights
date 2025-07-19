@@ -710,6 +710,6 @@ task.spawn(function()
 	local a = survival:AddParagraph({ Title = "fome:", Content = ghn() })
 	while true do
 		task.wait(0.5)
-		a:SetDesc(ghn())
+		a:SetDesc(ghn() .."%")
 	end
 end)
