@@ -701,3 +701,14 @@ Combat:AddParagraph({
 survival:AddParagraph({
 	Title = "Tou jaja criando o auto feed 😒😒"
 	})
+
+
+function ghn() return math.floor(game:GetService("Players").LocalPlayer.PlayerGui.Interface.StatBars.HungerBar.Bar.Size.X.Scale * 100) end
+function feed(nome) game:GetService("ReplicatedStorage").RemoteEvents.RequestConsumeItem:InvokeServer(workspace.Items[nome]) end
+
+task.spawn(function()
+	local a = survival:AddParagraph({Title = "fome: " Content = (ghn())})
+	while true do task.wait(0.5)
+	a:SetContent(ghn())
+	end
+	end)
