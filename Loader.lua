@@ -826,7 +826,7 @@ survival:AddSection("Auto Cook meat")
 
 survival:AddButton({
     Title = "cozinhar carnes",
-    Description = "Cozinha todas carnes cru e teleport para você",
+    Description = "Cozinha todas carnes cru e teleport para você -Pode dar bugs-",
     Callback = function()
         blmMeat()
         task.wait(2)
