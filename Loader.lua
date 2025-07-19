@@ -407,7 +407,7 @@ bring:AddButton({
 	elseif selectedItem == "Metal Chair" then
 	    bringMChair()
 	elseif selectedItem == "Morsel (Cooked & Normal)" then
-	    bringCarne()
+	    bringMorse()
         end
     end
 })
