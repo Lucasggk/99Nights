@@ -123,9 +123,9 @@ function bringLavar()
 	bl("Washing Machine", "Main")
 end
 
-function bringCarne()
-	bl("Morsel", "Main")
-	bl("Cooked Morsel", "Main")
+function bringMorse()
+	bl("Morsel", "Meat")
+	bl("Cooked Morsel", "Meat")
 end
 
 function tpfire()
