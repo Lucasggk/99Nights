@@ -777,4 +777,13 @@ tfe = survival:AddToggle("", {
     end
 })
 
-Survival:AddSection("Auto Cook meat")
+survival:AddSection("Auto Cook meat")
+
+survival:AddButton({
+	Title = "cozinhar carnes",
+	Description = "Cozinha todas carnes cru e teleport para você"
+	Callback = function()
+		blmMeat()
+		task.wait(0.1)
+		BringMeat()
+		end})
