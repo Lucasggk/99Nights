@@ -506,7 +506,7 @@ local vde = {}
 local espdown = esp:AddDropdown("espdropdown", {
 	Title = "Selecione Esp",
 	Description = "",
-	Values = ie,
+	Values = {"Coal", "Log"},
 	Multi = true,
 	Default = ie[1]
 })
