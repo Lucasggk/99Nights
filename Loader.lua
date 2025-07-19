@@ -540,9 +540,12 @@ tps:AddButton({
 --
 
 local ie = {"Bandage", "Bolt", "Broken Fan", "Broken Microwave", "Cake", "Carrot", "Chair", "Coal", "Coin Stack", "Cooked Morsel", "Cooked Steak", "Fuel Canister", "Iron Body", "Leather Armor", "Log", "MadKit", "Metal Chair", "MedKit", "Old Car Engine", "Old Flashlight", "Old Radio", "Revolver", "Revolver Ammo", "Rifle", "Rifle Ammo", "Morsel", "Sheet Metal", "Steak", "Tyre", "Washing Machine"}
-local vde = {}
+local me = {"Bunny", "Wolf"}
 
-local espdown = esp:AddDropdown("a", {
+local vde = {}
+local vdm = {}
+
+local espdownItems = esp:AddDropdown("a", {
    Title = "Itens",
    Description = "Selecione para o esp",
    Values = ie,
@@ -550,7 +553,7 @@ local espdown = esp:AddDropdown("a", {
    Default = {},
 })
 
-espdown:OnChanged(function(val)
+espdownItems:OnChanged(function(val)
 	table.clear(vde)
 	for i, state in next, val do
 		if state then
@@ -559,12 +562,32 @@ espdown:OnChanged(function(val)
 	end
 end)
 
+local espdownMobs = esp:AddDropdown("b", {
+   Title = "Mobs",
+   Description = "Selecione para o esp",
+   Values = me,
+   Multi = true,
+   Default = {},
+})
+
+espdownMobs:OnChanged(function(val)
+	table.clear(vdm)
+	for i, state in next, val do
+		if state then
+			vdm[#vdm + 1] = i
+		end
+	end
+end)
+
 esp:AddButton({
 	Title = "Adicionar esp",
-	Description = "Adiciona os itens selecionados em esp",
+	Description = "Adiciona os itens e mobs selecionados em esp",
 	Callback = function()
 		for _, i in vde do
-			Aesp(i)
+			Aesp(i, "item")
+		end
+		for _, m in vdm do
+			Aesp(m, "mob")
 		end
 	end
 })
@@ -572,7 +595,7 @@ esp:AddButton({
 _G.aae = false
 esp:AddToggle("", {
     Title = "Auto add esp", 
-    Description = "Mesma função que o button porem adiciona automaticamente aos novos itens spawnados", 
+    Description = "Mesma função que o button porem adiciona automaticamente aos novos itens e mobs spawnados", 
     Default = false,
     Callback = function(a) 
         _G.aae = a
@@ -580,7 +603,10 @@ esp:AddToggle("", {
             task.spawn(function()
                 while _G.aae do
                     for _, i in pairs(vde) do
-                        Aesp(i)
+                        Aesp(i, "item")
+                    end
+                    for _, m in pairs(vdm) do
+                        Aesp(m, "mob")
                     end
                     task.wait(1)
                 end
@@ -588,17 +614,21 @@ esp:AddToggle("", {
         end
     end
 })
-			
 
 esp:AddButton({
 	Title = "Remover esp",
-	Description = "Remove todos esp",
+	Description = "Remove todos esp dos itens e mobs",
 	Callback = function()
 		for _, i in vde do
-			Desp(i)
+			Desp(i, "item")
+		end
+		for _, m in vdm do
+			Desp(m, "mob")
 		end
 		table.clear(vde)
-		espdown:SetValue(vde)
+		table.clear(vdm)
+		espdownItems:SetValue(vde)
+		espdownMobs:SetValue(vdm)
 	end
 })
 
