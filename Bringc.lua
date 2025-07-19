@@ -42,3 +42,7 @@ function blmMet()
         blm("Washing Machine", "Main", "54, 4, -19")
 end
 
+function blmMeat()
+	blm("Steak", "Main", "-0, 8, 0")
+	blm("Morsel", "Meat", "-0, 8, 0")
+end
