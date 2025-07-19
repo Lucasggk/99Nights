@@ -4,6 +4,7 @@ repeat task.wait() until game.Players.LocalPlayer:FindFirstChild("PlayerGui")
 loadstring(game:HttpGet("https://raw.githubusercontent.com/Lucasggk/BlueLock/refs/heads/main/Fix.name.ui.lua"))()
 loadstring(game:HttpGet("https://raw.githubusercontent.com/Lucasggk/99Nights/main/Bring.lua"))()
 loadstring(game:HttpGet("https://raw.githubusercontent.com/Lucasggk/99Nights/main/Bringc.lua"))()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/Lucasggk/99Nights/main/Esp.lua"))()
 
 local Fluent = loadstring(game:HttpGet("https://github.com/dawid-scripts/Fluent/releases/latest/download/main.lua"))()
 
@@ -155,6 +156,7 @@ end)
 local player = Window:AddTab({ Title = "User", Icon = "user" })
 local bring = Window:AddTab({ Title = "Brings", Icon = "" })
 local tps = Window:AddTab({ Title = "Teleports", Icon = "" })
+local esp = Window:AddTab({ Title = "Esp", Icon = "" })
 
 -- script: Script 
 
@@ -494,4 +496,42 @@ tps:AddButton({
             end
         end
     end
+})
+
+--
+
+local ie = {"Coal", "Log"}
+local vde = {}
+
+local espdown = esp:AddDropdown("", {
+	Title = "Selecione Esp",
+	Description = "",
+	Values = ie,
+	Multi = true,
+	Default = nil,
+	Callback = function(v)
+		vde = v
+	end
+})
+
+esp:AddButton({
+	Title = "Adicionar esp",
+	Description = " ",
+	Callback = function()
+		for _, i in ipairs(vde) do
+			Aesp(i)
+		end
+	end
+})
+
+esp:AddButton({
+	Title = "Remover esp",
+	Description = " ",
+	Callback = function()
+		for _, i in ipairs(ie) do
+			Desp(i)
+			espdown:SetValue("")
+			espdown:SetValues({})
+		end
+	end
 })
