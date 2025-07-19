@@ -43,6 +43,6 @@ function blmMet()
 end
 
 function blmMeat()
-	blm("Steak", "Main", "-0, 3, 0", 3)
-	blm("Morsel", "Meat", "-0, 3, 0", 3)
+	blm("Steak", "Main", "-0, 4, 0", 0)
+	blm("Morsel", "Meat", "-0, 4, 0", 0)
 end
