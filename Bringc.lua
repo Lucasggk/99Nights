@@ -14,7 +14,7 @@ function blm(nome, caminho, pos)
 				if not obj then break end
 			end
 			if obj and obj:IsA("BasePart") then
-				if (obj.Position - destino).Magnitude > 5 then
+				if (obj.Position - destino).Magnitude > 30 then
 					obj.CFrame = CFrame.new(destino)
 				end
 			end
