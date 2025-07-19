@@ -503,16 +503,22 @@ tps:AddButton({
 local ie = {"Coal", "Log"}
 local vde = {}
 
-local espdown = esp:AddDropdown("", {
+local espdown = esp:AddDropdown("espdropdown", {
 	Title = "Selecione Esp",
 	Description = "",
 	Values = ie,
 	Multi = true,
-	Default = nil,
-	Callback = function(v)
-		vde = v
-	end
+	Default = ie[1]
 })
+
+espdown:OnChanged(function(Value)
+	vde = {}
+	for val, state in next, Value do
+		if state then
+			table.insert(vde, val)
+		end
+	end
+end)
 
 esp:AddButton({
 	Title = "Adicionar esp",
