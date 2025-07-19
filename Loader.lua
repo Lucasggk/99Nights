@@ -607,7 +607,7 @@ esp:AddButton({
 _G.killaura = nil
 Combat:AddToggle("", {
 	Title = "Kill Aura (OP)",
-	Description = "Ataca automaticamente qualquer NPC\nPara usar: Esteja com alguma arma corpo a corpo na sua mão\nEle ataca os 10 NPCs mais próximos",
+	Description = "Ataca automaticamente qualquer NPC\nPara usar: Esteja com alguma arma corpo a corpo na sua mão\nEle ataca o NPC mais próximo",
 	Default = false,
 	Callback = function(value)
 		local Players = game:GetService("Players")
@@ -615,7 +615,7 @@ Combat:AddToggle("", {
 		local RunService = game:GetService("RunService")
 
 		local LocalPlayer = Players.LocalPlayer
-		local evento = ReplicatedStorage:WaitForChild("RemoteEvents"):FindFirstChild("ToolDamageObject")
+		local evento = ReplicatedStorage.RemoteEvents:FindFirstChild("ToolDamageObject")
 		local caminho = workspace:FindFirstChild("Characters") or workspace
 
 		local armasValidas = {
@@ -627,61 +627,71 @@ Combat:AddToggle("", {
 			["Morningstar"] = true
 		}
 
-		local function getArmaEquipada()
-			local char = workspace:FindFirstChild(LocalPlayer.Name)
-			if not char then return end
-			local nomeArma = char:GetAttribute("Equipped")
-			if nomeArma and armasValidas[nomeArma] then
-				return nomeArma, char
+		local function getEquippedItem()
+			local char = LocalPlayer.Character
+			if not char then return nil end
+			for _, item in pairs(char:GetChildren()) do
+				if item:IsA("Tool") and armasValidas[item.Name] then
+					return item
+				end
 			end
+			return nil
 		end
 
 		local function gerarID()
 			return "2_" .. LocalPlayer.UserId
 		end
 
-		local function getNPCsMaisProximos(char, limite)
-			local hrp = char:FindFirstChild("HumanoidRootPart")
+		local function getNPCsMaisProximos(character, targets, limite)
+			local hrp = character:FindFirstChild("HumanoidRootPart")
 			if not hrp then return {} end
 
-			local lista = {}
+			local npcs = {}
 
-			for _, alvo in pairs(caminho:GetChildren()) do
-				if alvo ~= char then
+			for _, alvo in pairs(targets) do
+				if alvo ~= character then
 					local alvoRoot = alvo:FindFirstChild("HumanoidRootPart")
 					local humanoid = alvo:FindFirstChildWhichIsA("Humanoid")
 					if alvoRoot and humanoid and humanoid.Health > 0 then
 						local dist = (hrp.Position - alvoRoot.Position).Magnitude
-						table.insert(lista, { alvo = alvo, dist = dist })
+						table.insert(npcs, { alvo = alvo, dist = dist })
 					end
 				end
 			end
 
-			table.sort(lista, function(a, b)
+			table.sort(npcs, function(a, b)
 				return a.dist < b.dist
 			end)
 
 			local resultado = {}
-			for i = 1, math.min(limite, #lista) do
-				table.insert(resultado, lista[i].alvo)
+			for i = 1, math.min(limite, #npcs) do
+				table.insert(resultado, npcs[i].alvo)
 			end
 
-			return resultado, hrp
+			return resultado
 		end
 
 		if value then
 			_G.killaura = RunService.RenderStepped:Connect(function()
-				local arma, char = getArmaEquipada()
-				if not arma or not evento or not char then return end
+				local arma = getEquippedItem()
+				if not arma or not evento then return end
 
-				local npcs, hrp = getNPCsMaisProximos(char, 10)
-				for _, alvo in pairs(npcs) do
+				local c = LocalPlayer.Character
+				if not c then return end
+
+				local hrp = c:FindFirstChild("HumanoidRootPart")
+				if not hrp then return end
+
+				local alvos = getNPCsMaisProximos(c, caminho:GetChildren(), 15)
+				for _, alvo in pairs(alvos) do
 					evento:InvokeServer(alvo, arma, gerarID(), hrp.CFrame)
 				end
 			end)
-		elseif _G.killaura then
-			_G.killaura:Disconnect()
-			_G.killaura = nil
+		else
+			if _G.killaura then
+				_G.killaura:Disconnect()
+				_G.killaura = nil
+			end
 		end
 	end
 })
