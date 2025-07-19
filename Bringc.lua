@@ -14,6 +14,7 @@ function blm(nome, caminho, pos)
 				if not obj then break end
 			end
 			if obj and obj:IsA("BasePart") then
+				obj.Anchored = true
 				obj.CFrame = CFrame.new(destino)
 			end
 		end
