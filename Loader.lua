@@ -605,12 +605,11 @@ Combat:AddToggle("", {
 			return "2_" .. LocalPlayer.UserId
 		end
 
-		local function getClosestTarget(character, targets)
+		local function getNPCsMaisProximos(character, targets, limite)
 			local hrp = character:FindFirstChild("HumanoidRootPart")
-			if not hrp then return nil end
+			if not hrp then return {} end
 
-			local closest = nil
-			local minDist = math.huge
+			local npcs = {}
 
 			for _, alvo in pairs(targets) do
 				if alvo ~= character then
@@ -618,15 +617,21 @@ Combat:AddToggle("", {
 					local humanoid = alvo:FindFirstChildWhichIsA("Humanoid")
 					if alvoRoot and humanoid and humanoid.Health > 0 then
 						local dist = (hrp.Position - alvoRoot.Position).Magnitude
-						if dist < minDist then
-							minDist = dist
-							closest = alvo
-						end
+						table.insert(npcs, { alvo = alvo, dist = dist })
 					end
 				end
 			end
 
-			return closest
+			table.sort(npcs, function(a, b)
+				return a.dist < b.dist
+			end)
+
+			local resultado = {}
+			for i = 1, math.min(limite, #npcs) do
+				table.insert(resultado, npcs[i].alvo)
+			end
+
+			return resultado
 		end
 
 		if value then
@@ -637,13 +642,13 @@ Combat:AddToggle("", {
 				local c = LocalPlayer.Character
 				if not c then return end
 
-				local alvoMaisProximo = getClosestTarget(c, caminho:GetChildren())
-				if not alvoMaisProximo then return end
-
 				local hrp = c:FindFirstChild("HumanoidRootPart")
 				if not hrp then return end
 
-				evento:InvokeServer(alvoMaisProximo, arma, gerarID(), hrp.CFrame)
+				local alvos = getNPCsMaisProximos(c, caminho:GetChildren(), 15)
+				for _, alvo in pairs(alvos) do
+					evento:InvokeServer(alvo, arma, gerarID(), hrp.CFrame)
+				end
 			end)
 		else
 			if _G.killaura then
@@ -655,6 +660,6 @@ Combat:AddToggle("", {
 })
 
 Combat:AddParagraph({
-    Title = "Armas Válidas para Kill Aura",
-    Content = "Old Axe\nGood Axe\nStrong Axe\nSpear\nKatana\nMorningstar"
+	Title = "Armas Válidas para Kill Aura",
+	Content = "Old Axe\nGood Axe\nStrong Axe\nSpear\nKatana\nMorningstar"
 })
