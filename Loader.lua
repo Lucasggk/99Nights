@@ -533,7 +533,7 @@ tps:AddButton({
 
 --
 
-local ie = {"Coal", "Revolver", "Rifle", "Revolver Ammo", "Rifle Ammo"}
+local ie = {"Coal", "Revolver", "Rifle", "Revolver Ammo", "Rifle Ammo", "Bandage", "Bolt", "Broken Fan", "Broken Microwave", "Cake", "Carrot", "Chair", "Coin Stack", "Fuel Canister", "Iron Body", "Leather Armor", "Log", "MedKit", "Metal Chair", "Oil Barrel", "Old Car Engine", "Old Flashlight", "Old Radio", "Sheet Metal", "Tyre", "Washing Machine"}
 local vde = {}
 
 local espdown = esp:AddDropdown("a", {
@@ -697,10 +697,6 @@ Combat:AddParagraph({
 
 
 --
-
-survival:AddParagraph({
-	Title = "Tou jaja criando o auto feed 😒😒 correção 1"
-	})
 
 function wiki(nome) local c=0; for _,i in ipairs(workspace.Items:GetChildren()) do if i.Name==nome then c=c+1 end end; return c end
 function ghn() return math.floor(game:GetService("Players").LocalPlayer.PlayerGui.Interface.StatBars.HungerBar.Bar.Size.X.Scale * 100) end
