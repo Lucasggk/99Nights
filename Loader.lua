@@ -596,7 +596,7 @@ esp:AddButton({
 	end
 })
 
-__G.aae = false
+_G.aae = false
 
 esp:AddToggle("", {
     Title = "Auto add esp", 
