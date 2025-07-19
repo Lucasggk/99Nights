@@ -504,8 +504,8 @@ local ie = {"Coal", "Log"}
 local vde = {}
 
 local espdown = esp:AddDropdown("a", {
-   Title = "test",
-   Description = "test",
+   Title = "Itens",
+   Description = "Selecione para o esp",
    Values = ie,
    Multi = true,
    Default = {},
@@ -522,7 +522,7 @@ end)
 
 esp:AddButton({
 	Title = "Adicionar esp",
-	Description = " ",
+	Description = "Adiciona os itens selecionados em esp",
 	Callback = function()
 		for _, i in vde do
 			Aesp(i)
@@ -532,12 +532,12 @@ esp:AddButton({
 
 esp:AddButton({
 	Title = "Remover esp",
-	Description = " ",
+	Description = "Remove todos esp",
 	Callback = function()
 		for _, i in vde do
 			Desp(i)
 		end
 		table.clear(vde)
-		espdown:SetValues(vde)
+		espdown:SetValue(vde)
 	end
 })
