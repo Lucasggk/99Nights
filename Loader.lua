@@ -726,7 +726,7 @@ survival:AddDropdown("", {
     Description = "Selecione o alimento para auto feed",
     Values = alimentos,
     Multi = false,
-    Default = {},
+    Default = nil,
     Callback = function(value) c = value end
 })
 
