@@ -269,6 +269,36 @@ player:AddToggle("", {
 	end
 })
 
+player:AddSection("Miscs")
+
+player:AddToggle("removerfog", {
+	Title = "Remover Neblina (Fog)",
+	Description = "Ativa ou desativa a neblina do jogo.",
+	Default = false,
+	Callback = function(value)
+		local Lighting = game:GetService("Lighting")
+		
+		if value then
+			Lighting:SetAttribute("FogStartOriginal", Lighting.FogStart)
+			Lighting:SetAttribute("FogEndOriginal", Lighting.FogEnd)
+			Lighting:SetAttribute("FogColorOriginal", Lighting.FogColor)
+			
+			Lighting.FogStart = 1e10
+			Lighting.FogEnd = 1e10
+			Lighting.FogColor = Color3.new(1, 1, 1)
+		else
+			local fogStart = Lighting:GetAttribute("FogStartOriginal") or 0
+			local fogEnd = Lighting:GetAttribute("FogEndOriginal") or 100000
+			local fogColor = Lighting:GetAttribute("FogColorOriginal") or Color3.new(1, 1, 1)
+
+			Lighting.FogStart = fogStart
+			Lighting.FogEnd = fogEnd
+			Lighting.FogColor = fogColor
+		end
+	end
+})
+
+
 --
 
 
