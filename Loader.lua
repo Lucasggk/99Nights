@@ -706,6 +706,10 @@ survival:AddParagraph({
 function ghn() return math.floor(game:GetService("Players").LocalPlayer.PlayerGui.Interface.StatBars.HungerBar.Bar.Size.X.Scale * 100) end
 function feed(nome) game:GetService("ReplicatedStorage").RemoteEvents.RequestConsumeItem:InvokeServer(workspace.Items[nome]) end
 
+local vf, ife
+local tf = false
+local c = "Carrot"
+
 task.spawn(function()
 	local a = survival:AddParagraph({ Title = "fome:", Content = ghn() })
 	while true do
@@ -713,3 +717,39 @@ task.spawn(function()
 		a:SetDesc(ghn() .."%")
 	end
 end)
+
+ife = survival:AddInput("", {
+    Title = "Feed %",
+    Description = "Quando fome atingir (X%) Comer",
+    Default = 75,
+    Placeholder = "",
+    Numeric = true,
+    Finished = false, 
+    Callback = function(Value)
+        vf = Value
+        if Value < 0 then
+            ife:SetValue(1)
+        elseif Value > 100 then
+            ife:SetValue(100)
+        end 
+    end
+})
+
+survival:AddToggle("", {
+    Title = "Ativar auto feed",
+    Description = "Auto se explica",
+    Default = false,
+    Callback = function(v)
+        tf = v
+        if tf then
+            task.spawn(function()
+                while tf do
+                    task.wait(0.25)
+                    if tonumber(ghn()) <= tonumber(vf) then
+                        feed(c)
+                    end
+                end
+            end)
+        end
+    end
+})
