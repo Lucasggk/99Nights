@@ -3,7 +3,7 @@ function Aesp(nome, tipo)
 	if tipo == "item" then
 		container = workspace:WaitForChild("Items")
 	elseif tipo == "mob" then
-		container = workspace:WaitForChild("Mobs")
+		container = workspace.Characters
 	else
 		return
 	end
@@ -49,7 +49,7 @@ function Desp(nome, tipo)
 	if tipo == "item" then
 		container = workspace:WaitForChild("Items")
 	elseif tipo == "mob" then
-		container = workspace:WaitForChild("Mobs")
+		container = workspace.Characters
 	else
 		return
 	end
