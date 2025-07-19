@@ -548,7 +548,7 @@ esp:AddButton({
 _G.killaura = nil
 Combat:AddToggle("", {
 	Title = "Kill Aura (OP)",
-	Description = "Ataca automaticamente qualquer NPC\nPorem você tem que estar com machado na mão\n*Funciona com todos machados*\nEle ataca todos NPCs que foram gerados no mapa!",
+	Description = "Ataca automaticamente qualquer NPC\nPara usar: Esteja com alguma arma corpo a corpo na sua mão\nEle ataca todos NPCs gerados no mapa",
 	Default = false,
 	Callback = function(value)
 		local Players = game:GetService("Players")
@@ -559,17 +559,20 @@ Combat:AddToggle("", {
 		local evento = ReplicatedStorage.RemoteEvents:FindFirstChild("ToolDamageObject")
 		local caminho = workspace:FindFirstChild("Characters") or workspace
 
-		local machados = {
+		local armasValidas = {
 			["Old Axe"] = true,
 			["Good Axe"] = true,
-			["Strong Axe"] = true
+			["Strong Axe"] = true,
+			["Spear"] = true,
+			["Katana"] = true,
+			["Morningstar"] = true
 		}
 
-		local function getMachado()
+		local function getArmaValida()
 			local inv = LocalPlayer:FindFirstChild("Inventory")
 			if not inv then return nil end
 			for _, item in pairs(inv:GetChildren()) do
-				if machados[item.Name] then
+				if armasValidas[item.Name] then
 					return item
 				end
 			end
@@ -582,7 +585,7 @@ Combat:AddToggle("", {
 
 		if value then
 			_G.killaura = RunService.RenderStepped:Connect(function()
-				local arma = getMachado()
+				local arma = getArmaValida()
 				if not arma or not evento then return end
 
 				local c = LocalPlayer.Character
