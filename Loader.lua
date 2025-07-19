@@ -705,6 +705,13 @@ survival:AddParagraph({
 function wiki(nome) local c=0; for _,i in ipairs(workspace.Items:GetChildren()) do if i.Name==nome then c=c+1 end end; return c end
 function ghn() return math.floor(game:GetService("Players").LocalPlayer.PlayerGui.Interface.StatBars.HungerBar.Bar.Size.X.Scale * 100) end
 function feed(nome) game:GetService("ReplicatedStorage").RemoteEvents.RequestConsumeItem:InvokeServer(workspace.Items[nome]) end
+function notifeed(nome)
+	Fluent:Notify({
+        Title = "Auto feed pause",
+        Content = "Sem '".. nome .."' Spawnado para consumo, Selecione outra comida",
+        Duration = 3
+})
+
 
 local vf, ife, tfe
 local tf = false
@@ -712,9 +719,11 @@ local c = "Carrot"
 
 task.spawn(function()
 	local a = survival:AddParagraph({ Title = "fome:", Content = ghn() })
+	local b = survival:AddParagraph({ Title = "Comida selecionada: ", Content = c })
 	while true do
-		task.wait(0.5)
+		task.wait(0.2)
 		a:SetDesc(ghn() .."%")
+		b:SetDesc(c)
 	end
 end)
 
@@ -747,6 +756,7 @@ tfe = survival:AddToggle("", {
                     task.wait(0.25)
                     if tonumber(wiki(c)) < 1 then 
                         tfe:SetValue(false) 
+			notifeed(c)
                         break 
                     end
                     if tonumber(ghn()) <= tonumber(vf) then
