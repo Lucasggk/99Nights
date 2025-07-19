@@ -702,29 +702,47 @@ survival:AddParagraph({
 	Title = "Tou jaja criando o auto feed 😒😒 correção 1"
 	})
 
-function wiki(nome) local c=0; for _,i in ipairs(workspace.Items:GetChildren()) do if i.Name==nome then c=c+1 end end; return c end
-function ghn() return math.floor(game:GetService("Players").LocalPlayer.PlayerGui.Interface.StatBars.HungerBar.Bar.Size.X.Scale * 100) end
-function feed(nome) game:GetService("ReplicatedStorage").RemoteEvents.RequestConsumeItem:InvokeServer(workspace.Items[nome]) end
+function wiki(nome) 
+    local c = 0
+    for _, i in ipairs(workspace.Items:GetChildren()) do 
+        if i.Name == nome then 
+            c = c + 1 
+        end 
+    end
+    return c 
+end
+
+function ghn() 
+    return math.floor(game:GetService("Players").LocalPlayer.PlayerGui.Interface.StatBars.HungerBar.Bar.Size.X.Scale * 100) 
+end
+
+function feed(nome) 
+    local item = workspace.Items:FindFirstChild(nome)
+    if item then
+        game:GetService("ReplicatedStorage").RemoteEvents.RequestConsumeItem:InvokeServer(item)
+    end
+end
+
 function notifeed(nome)
-	Fluent:Notify({
+    Fluent:Notify({
         Title = "Auto feed pause",
         Content = "Sem '".. nome .."' Spawnado para consumo, Selecione outra comida",
         Duration = 3
-})
-
+    })
+end
 
 local vf, ife, tfe
 local tf = false
 local c = "Carrot"
 
 task.spawn(function()
-	local a = survival:AddParagraph({ Title = "fome:", Content = ghn() })
-	local b = survival:AddParagraph({ Title = "Comida selecionada: ", Content = c })
-	while true do
-		task.wait(0.2)
-		a:SetDesc(ghn() .."%")
-		b:SetDesc(c)
-	end
+    local a = survival:AddParagraph({ Title = "fome:", Content = ghn() })
+    local b = survival:AddParagraph({ Title = "Comida selecionada:", Content = c })
+    while true do
+        task.wait(0.2)
+        a:SetDesc(ghn() .. "%")
+        b:SetDesc(c)
+    end
 end)
 
 ife = survival:AddInput("", {
@@ -735,11 +753,13 @@ ife = survival:AddInput("", {
     Numeric = true,
     Finished = false, 
     Callback = function(Value)
-        vf = Value
-        if tonumber(Value) < 0 then
-            ife:SetValue(1)
-        elseif tonumber(Value) > 100 then
-            ife:SetValue(100)
+        vf = tonumber(Value) or 75
+        if vf < 0 then
+            vf = 1
+            ife:SetValue(vf)
+        elseif vf > 100 then
+            vf = 100
+            ife:SetValue(vf)
         end 
     end
 })
@@ -754,12 +774,12 @@ tfe = survival:AddToggle("", {
             task.spawn(function()
                 while tf do
                     task.wait(0.25)
-                    if tonumber(wiki(c)) < 1 then 
+                    if wiki(c) < 1 then 
                         tfe:SetValue(false) 
-			notifeed(c)
+                        notifeed(c)
                         break 
                     end
-                    if tonumber(ghn()) <= tonumber(vf) then
+                    if ghn() <= vf then
                         feed(c)
                     end
                 end
