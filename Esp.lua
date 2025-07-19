@@ -1,17 +1,26 @@
-function Aesp(nome)
-	local itens = workspace:WaitForChild("Items")
+function Aesp(nome, tipo)
+	local container
+	if tipo == "item" then
+		container = workspace:WaitForChild("Items")
+	elseif tipo == "mob" then
+		container = workspace:WaitForChild("Mobs")
+	else
+		return
+	end
 
-	for _, item in ipairs(itens:GetChildren()) do
-		if item.Name == nome then
+	for _, obj in ipairs(container:GetChildren()) do
+		if obj.Name == nome then
 			local parte = nil
-			if item:IsA("BasePart") then
-				parte = item
-			elseif item:IsA("Model") then
-				parte = item:FindFirstChildWhichIsA("BasePart")
+			if obj:IsA("BasePart") then
+				parte = obj
+			elseif obj:IsA("Model") then
+				parte = obj:FindFirstChildWhichIsA("BasePart")
 			end
 
 			if parte then
-				if parte:FindFirstChild("ESPTexto") then continue end -- evita duplicar
+				if parte:FindFirstChild("ESPTexto") then
+					continue
+				end
 
 				local esp = Instance.new("BillboardGui")
 				esp.Name = "ESPTexto"
@@ -23,7 +32,7 @@ function Aesp(nome)
 				local texto = Instance.new("TextLabel", esp)
 				texto.Size = UDim2.new(1, 0, 1, 0)
 				texto.BackgroundTransparency = 1
-				texto.Text = item.Name
+				texto.Text = obj.Name
 				texto.TextColor3 = Color3.fromRGB(255, 255, 0)
 				texto.TextStrokeTransparency = 0.2
 				texto.TextScaled = true
@@ -35,16 +44,23 @@ function Aesp(nome)
 	end
 end
 
-function Desp(nome)
-	local itens = workspace:WaitForChild("Items")
+function Desp(nome, tipo)
+	local container
+	if tipo == "item" then
+		container = workspace:WaitForChild("Items")
+	elseif tipo == "mob" then
+		container = workspace:WaitForChild("Mobs")
+	else
+		return
+	end
 
-	for _, item in ipairs(itens:GetChildren()) do
-		if item.Name == nome then
+	for _, obj in ipairs(container:GetChildren()) do
+		if obj.Name == nome then
 			local parte = nil
-			if item:IsA("BasePart") then
-				parte = item
-			elseif item:IsA("Model") then
-				parte = item:FindFirstChildWhichIsA("BasePart")
+			if obj:IsA("BasePart") then
+				parte = obj
+			elseif obj:IsA("Model") then
+				parte = obj:FindFirstChildWhichIsA("BasePart")
 			end
 
 			if parte then
