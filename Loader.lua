@@ -7,18 +7,11 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/Lucasggk/99Nights/mai
 loadstring(game:HttpGet("https://raw.githubusercontent.com/Lucasggk/99Nights/main/Esp.lua"))()
 loadstring(game:HttpGet("https://raw.githubusercontent.com/Lucasggk/99Nights/refs/heads/main/No%20void.lua"))()
 
-local xac = {
-	Vers = "1.5"
-	Path = "Correção de bugs"
-}
-
-local Extra = ("Versão: ".. xac.Vers .." - ".. xac.Path)
-
 local Fluent = loadstring(game:HttpGet("https://github.com/dawid-scripts/Fluent/releases/latest/download/main.lua"))()
 
 local Window = Fluent:CreateWindow({
     Title = "99 Nights In The Forest |",
-    SubTitle = "by Lucas | ".. Extra,
+    SubTitle = "by Lucas | 1.5",
     TabWidth = 180,
     Size = UDim2.fromOffset(600, 350),
     Acrylic = false,
