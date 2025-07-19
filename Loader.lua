@@ -154,8 +154,8 @@ end)
 
 -- script: tabs
 local player = Window:AddTab({ Title = "User", Icon = "user" })
-local bring = Window:AddTab({ Title = "Brings", Icon = "" })
 local tps = Window:AddTab({ Title = "Teleports", Icon = "" })
+local bring = Window:AddTab({ Title = "Brings", Icon = "" })
 local esp = Window:AddTab({ Title = "Esp", Icon = "" })
 local Combat = Window:AddTab({ Title = "Combat", Icon = "" })
 
@@ -483,6 +483,7 @@ tps:AddButton({
     Callback = function()
 	tv = {}
         Dropdown:SetValues(tv)
+	Dropdown:SetValue(tv)
     end
 })
 
@@ -501,7 +502,7 @@ tps:AddButton({
 
 --
 
-local ie = {"Coal", "Log"}
+local ie = {"Coal", "Revolver", "Rifle", "Revolver Ammo", "Rifle Ammo"}
 local vde = {}
 
 local espdown = esp:AddDropdown("a", {
@@ -531,6 +532,27 @@ esp:AddButton({
 	end
 })
 
+_G.aae = false
+esp:AddToggle("", {
+    Title = "Auto add esp", 
+    Description = "Mesma função que o button porem adiciona automaticamente aos novos itens spawnados", 
+    Default = false,
+    Callback = function(a) 
+        _G.aae = a
+        if _G.aae then
+            task.spawn(function()
+                while _G.aae do
+                    for _, i in pairs(vde) do
+                        Aesp(i)
+                    end
+                    task.wait(1)
+                end
+            end)
+        end
+    end
+})
+			
+
 esp:AddButton({
 	Title = "Remover esp",
 	Description = "Remove todos esp",
@@ -548,7 +570,7 @@ esp:AddButton({
 _G.killaura = nil
 Combat:AddToggle("", {
 	Title = "Kill Aura (OP)",
-	Description = "Ataca automaticamente qualquer NPC\nPara usar: Esteja com alguma arma corpo a corpo na sua mão\nEle ataca todos NPCs gerados no mapa",
+	Description = "Ataca automaticamente qualquer NPC\nPara usar: Esteja com alguma arma corpo a corpo na sua mão\nEle ataca o NPC mais próximo",
 	Default = false,
 	Callback = function(value)
 		local Players = game:GetService("Players")
@@ -583,6 +605,30 @@ Combat:AddToggle("", {
 			return "2_" .. LocalPlayer.UserId
 		end
 
+		local function getClosestTarget(character, targets)
+			local hrp = character:FindFirstChild("HumanoidRootPart")
+			if not hrp then return nil end
+
+			local closest = nil
+			local minDist = math.huge
+
+			for _, alvo in pairs(targets) do
+				if alvo ~= character then
+					local alvoRoot = alvo:FindFirstChild("HumanoidRootPart")
+					local humanoid = alvo:FindFirstChildWhichIsA("Humanoid")
+					if alvoRoot and humanoid and humanoid.Health > 0 then
+						local dist = (hrp.Position - alvoRoot.Position).Magnitude
+						if dist < minDist then
+							minDist = dist
+							closest = alvo
+						end
+					end
+				end
+			end
+
+			return closest
+		end
+
 		if value then
 			_G.killaura = RunService.RenderStepped:Connect(function()
 				local arma = getArmaValida()
@@ -590,17 +636,14 @@ Combat:AddToggle("", {
 
 				local c = LocalPlayer.Character
 				if not c then return end
+
+				local alvoMaisProximo = getClosestTarget(c, caminho:GetChildren())
+				if not alvoMaisProximo then return end
+
 				local hrp = c:FindFirstChild("HumanoidRootPart")
 				if not hrp then return end
 
-				for _, alvo in pairs(caminho:GetChildren()) do
-					if alvo ~= c then
-						local alvoRoot = alvo:FindFirstChild("HumanoidRootPart")
-						if alvoRoot and alvo:FindFirstChildWhichIsA("Humanoid") then
-							evento:InvokeServer(alvo, arma, gerarID(), hrp.CFrame)
-						end
-					end
-				end
+				evento:InvokeServer(alvoMaisProximo, arma, gerarID(), hrp.CFrame)
 			end)
 		else
 			if _G.killaura then
