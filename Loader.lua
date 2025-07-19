@@ -317,6 +317,7 @@ local itens = {
     "Carrot",
     "Chair",
     "Coal",
+    "Morsel (Cooked & Normal)",
     "Coin Stack",
     "Fuel Canister",
     "Iron Body",
@@ -405,6 +406,8 @@ bring:AddButton({
 	    bringLavar()
 	elseif selectedItem == "Metal Chair" then
 	    bringMChair()
+	elseif selectedItem == "Morsel (Cooked & Normal)" then
+	    bringCarne()
         end
     end
 })
@@ -533,7 +536,7 @@ tps:AddButton({
 
 --
 
-local ie = {"Coal", "Revolver", "Rifle", "Revolver Ammo", "Rifle Ammo", "Bandage", "Bolt", "Broken Fan", "Broken Microwave", "Cake", "Carrot", "Chair", "Coin Stack", "Fuel Canister", "Iron Body", "Leather Armor", "Log", "MedKit", "Metal Chair", "Oil Barrel", "Old Car Engine", "Old Flashlight", "Old Radio", "Sheet Metal", "Tyre", "Washing Machine"}
+local ie = {"Bandage", "Bolt", "Broken Fan", "Broken Microwave", "Cake", "Carrot", "Chair", "Coal", "Coin Stack", "Cooked Morsel", "Cooked Steak", "Fuel Canister", "Iron Body", "Leather Armor", "Log", "MadKit", "Metal Chair", "MedKit", "Old Car Engine", "Old Flashlight", "Old Radio", "Revolver", "Revolver Ammo", "Rifle", "Rifle Ammo", "Morsel", "Sheet Metal", "Steak", "Tyre", "Washing Machine"}
 local vde = {}
 
 local espdown = esp:AddDropdown("a", {
