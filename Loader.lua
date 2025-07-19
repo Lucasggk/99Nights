@@ -157,6 +157,7 @@ local player = Window:AddTab({ Title = "User", Icon = "user" })
 local bring = Window:AddTab({ Title = "Brings", Icon = "" })
 local tps = Window:AddTab({ Title = "Teleports", Icon = "" })
 local esp = Window:AddTab({ Title = "Esp", Icon = "" })
+local Combat = Window:AddTab({ Title = "Combat", Icon = "" })
 
 -- script: Script 
 
@@ -539,5 +540,70 @@ esp:AddButton({
 		end
 		table.clear(vde)
 		espdown:SetValue(vde)
+	end
+})
+
+--
+
+_G.killaura = nil
+Combat:AddToggle("", {
+	Title = "Kill Aura (OP)",
+	Description = "Ataca automaticamente qualquer NPC\nPorem você tem que estar com machado na mão\n*Funciona com todos machados*\nEle ataca todos NPCs que foram gerados no mapa!",
+	Default = false,
+	Callback = function(value)
+		local Players = game:GetService("Players")
+		local ReplicatedStorage = game:GetService("ReplicatedStorage")
+		local RunService = game:GetService("RunService")
+
+		local LocalPlayer = Players.LocalPlayer
+		local evento = ReplicatedStorage.RemoteEvents:FindFirstChild("ToolDamageObject")
+		local caminho = workspace:FindFirstChild("Characters") or workspace
+
+		local machados = {
+			["Old Axe"] = true,
+			["Good Axe"] = true,
+			["Strong Axe"] = true
+		}
+
+		local function getMachado()
+			local inv = LocalPlayer:FindFirstChild("Inventory")
+			if not inv then return nil end
+			for _, item in pairs(inv:GetChildren()) do
+				if machados[item.Name] then
+					return item
+				end
+			end
+			return nil
+		end
+
+		local function gerarID()
+			return "2_" .. LocalPlayer.UserId
+		end
+
+		if value then
+			_G.killaura = RunService.RenderStepped:Connect(function()
+				local arma = getMachado()
+				if not arma or not evento then return end
+
+				local c = LocalPlayer.Character
+				if not c then return end
+				local hrp = c:FindFirstChild("HumanoidRootPart")
+				if not hrp then return end
+
+				for _, alvo in pairs(caminho:GetChildren()) do
+					if alvo ~= c then
+						local alvoRoot = alvo:FindFirstChild("HumanoidRootPart")
+						if alvoRoot and alvo:FindFirstChildWhichIsA("Humanoid") then
+							evento:InvokeServer(alvo, arma, gerarID(), hrp.CFrame)
+						end
+					end
+				end
+			end)
+		else
+			if _G.killaura then
+				_G.killaura:Disconnect()
+				_G.killaura = nil
+			end
+		end
 	end
 })
