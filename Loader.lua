@@ -627,16 +627,19 @@ local armasValidas = {
 	["Morningstar"] = true    
 }    
 
-local function getArmaValida()    
-	local inv = LocalPlayer:FindFirstChild("Inventory")    
-	if not inv then return nil end    
-	for _, item in pairs(inv:GetChildren()) do    
-		if armasValidas[item.Name] then    
-			return item    
-		end    
-	end    
-	return nil    
-end    
+function getArmaValida()
+    local inv = LocalPlayer:FindFirstChild("Inventory")
+    local char = workspace[LocalPlayer.Name]
+    local equipado = char and char:GetAttribute("Equipped")
+    if not equipado or not armasValidas[equipado] then return nil end
+    if inv then
+        local arma = inv:FindFirstChild(equipado)
+        if arma then
+            return arma
+        end
+    end
+    return nil
+end
 
 local function gerarID()    
 	return "2_" .. LocalPlayer.UserId    
