@@ -154,11 +154,11 @@ end)
 
 -- script: tabs
 local player = Window:AddTab({ Title = "User", Icon = "user" })
+local survival = Window:AddTab({ Title = "Sobrevivência", Icon = "" })
 local tps = Window:AddTab({ Title = "Teleports", Icon = "" })
 local bring = Window:AddTab({ Title = "Brings", Icon = "" })
 local esp = Window:AddTab({ Title = "Esp", Icon = "" })
 local Combat = Window:AddTab({ Title = "Combat", Icon = "" })
-
 -- script: Script 
 
 player:AddSection("WalkSpeed")
@@ -663,3 +663,10 @@ Combat:AddParagraph({
 	Title = "Armas Válidas para Kill Aura",
 	Content = "Old Axe\nGood Axe\nStrong Axe\nSpear\nKatana\nMorningstar"
 })
+
+
+--
+
+survival:AddParagraph({
+	Title = "Tou jaja criando o auto feed 😒😒"
+	})
