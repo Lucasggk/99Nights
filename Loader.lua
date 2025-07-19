@@ -503,11 +503,12 @@ tps:AddButton({
 local ie = {"Coal", "Log"}
 local vde = {}
 
-local espdown = esp:AddDropdown("espdropdown", {
-	Title = "Selecione Esp",
-	Description = "",
-	Values = ie,
-	Multi = true,
+local espdown = esp:AddDropdown("a", {
+   Title = "test",
+   Description = "test",
+   Values = ie,
+   Multi = true,
+   Default = ie,
 })
 
 espdown:OnChanged(function(val)
