@@ -606,94 +606,91 @@ esp:AddButton({
 
 _G.killaura = nil
 Combat:AddToggle("", {
-	Title = "Kill Aura (OP)",
-	Description = "Ataca automaticamente qualquer NPC\nPara usar: Esteja com alguma arma corpo a corpo na sua mão\nEle ataca o NPC mais próximo",
-	Default = false,
-	Callback = function(value)
-		local Players = game:GetService("Players")
-		local ReplicatedStorage = game:GetService("ReplicatedStorage")
-		local RunService = game:GetService("RunService")
+    Title = "Kill Aura (OP)",
+    Description = "Ataca automaticamente qualquer NPC\nPara usar: Esteja com alguma arma corpo a corpo na sua mão\nEle ataca o NPC mais próximo",
+    Default = false,
+    Callback = function(value)
+        local Players = game:GetService("Players")
+        local ReplicatedStorage = game:GetService("ReplicatedStorage")
+        local RunService = game:GetService("RunService")
 
-		local LocalPlayer = Players.LocalPlayer
-		local evento = ReplicatedStorage.RemoteEvents:FindFirstChild("ToolDamageObject")
-		local caminho = workspace:FindFirstChild("Characters") or workspace
+        local LocalPlayer = Players.LocalPlayer
+        local evento = ReplicatedStorage.RemoteEvents:FindFirstChild("ToolDamageObject")
+        local caminho = workspace:FindFirstChild("Characters") or workspace
 
-		local armasValidas = {
-			["Old Axe"] = true,
-			["Good Axe"] = true,
-			["Strong Axe"] = true,
-			["Spear"] = true,
-			["Katana"] = true,
-			["Morningstar"] = true
-		}
+        local armasValidas = {    
+            ["Old Axe"] = true,    
+            ["Good Axe"] = true,    
+            ["Strong Axe"] = true,    
+            ["Spear"] = true,    
+            ["Katana"] = true,    
+            ["Morningstar"] = true    
+        }    
 
-		local function getEquippedItem()
-			local char = LocalPlayer.Character
-			if not char then return nil end
-			for _, item in pairs(char:GetChildren()) do
-				if item:IsA("Tool") and armasValidas[item.Name] then
-					return item
-				end
-			end
-			return nil
-		end
+        local function getArmaValida()
+            local equippedName = workspace[LocalPlayer.Name]:GetAttribute("Equipped")
+            if equippedName and armasValidas[equippedName] then
+                return equippedName
+            end
+            return nil
+        end    
 
-		local function gerarID()
-			return "2_" .. LocalPlayer.UserId
-		end
+        local function gerarID()    
+            return "2_" .. LocalPlayer.UserId    
+        end    
 
-		local function getNPCsMaisProximos(character, targets, limite)
-			local hrp = character:FindFirstChild("HumanoidRootPart")
-			if not hrp then return {} end
+        local function getNPCsMaisProximos(character, targets, limite)    
+            local hrp = character:FindFirstChild("HumanoidRootPart")    
+            if not hrp then return {} end    
 
-			local npcs = {}
+            local npcs = {}    
 
-			for _, alvo in pairs(targets) do
-				if alvo ~= character then
-					local alvoRoot = alvo:FindFirstChild("HumanoidRootPart")
-					local humanoid = alvo:FindFirstChildWhichIsA("Humanoid")
-					if alvoRoot and humanoid and humanoid.Health > 0 then
-						local dist = (hrp.Position - alvoRoot.Position).Magnitude
-						table.insert(npcs, { alvo = alvo, dist = dist })
-					end
-				end
-			end
+            for _, alvo in pairs(targets) do    
+                if alvo ~= character then    
+                    local alvoRoot = alvo:FindFirstChild("HumanoidRootPart")    
+                    local humanoid = alvo:FindFirstChildWhichIsA("Humanoid")    
+                    if alvoRoot and humanoid and humanoid.Health > 0 then    
+                        local dist = (hrp.Position - alvoRoot.Position).Magnitude    
+                        table.insert(npcs, { alvo = alvo, dist = dist })    
+                    end    
+                end    
+            end    
 
-			table.sort(npcs, function(a, b)
-				return a.dist < b.dist
-			end)
+            table.sort(npcs, function(a, b)    
+                return a.dist < b.dist    
+            end)    
 
-			local resultado = {}
-			for i = 1, math.min(limite, #npcs) do
-				table.insert(resultado, npcs[i].alvo)
-			end
+            local resultado = {}    
+            for i = 1, math.min(limite, #npcs) do    
+                table.insert(resultado, npcs[i].alvo)    
+            end    
 
-			return resultado
-		end
+            return resultado    
+        end    
 
-		if value then
-			_G.killaura = RunService.RenderStepped:Connect(function()
-				local arma = getEquippedItem()
-				if not arma or not evento then return end
+        if value then    
+            _G.killaura = RunService.RenderStepped:Connect(function()    
+                local armaNome = getArmaValida()
+                if not armaNome or not evento then return end    
 
-				local c = LocalPlayer.Character
-				if not c then return end
+                local c = LocalPlayer.Character    
+                if not c then return end    
 
-				local hrp = c:FindFirstChild("HumanoidRootPart")
-				if not hrp then return end
+                local hrp = c:FindFirstChild("HumanoidRootPart")    
+                if not hrp then return end    
 
-				local alvos = getNPCsMaisProximos(c, caminho:GetChildren(), 15)
-				for _, alvo in pairs(alvos) do
-					evento:InvokeServer(alvo, arma, gerarID(), hrp.CFrame)
-				end
-			end)
-		else
-			if _G.killaura then
-				_G.killaura:Disconnect()
-				_G.killaura = nil
-			end
-		end
-	end
+                local alvos = getNPCsMaisProximos(c, caminho:GetChildren(), 15)    
+                for _, alvo in pairs(alvos) do    
+                    evento:InvokeServer(alvo, armaNome, gerarID(), hrp.CFrame)    
+                end    
+            end)    
+        else    
+            if _G.killaura then    
+                _G.killaura:Disconnect()    
+                _G.killaura = nil    
+            end    
+        end    
+    end
 })
 
 Combat:AddParagraph({
