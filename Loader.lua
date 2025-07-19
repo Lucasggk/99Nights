@@ -673,6 +673,10 @@ end
 
 if value then    
 	_G.killaura = RunService.RenderStepped:Connect(function()    
+		local char = workspace[Players.LocalPlayer.Name]
+		local equipado = char and char:GetAttribute("Equipped")
+		if not equipado or not armasValidas[equipado] then return end
+
 		local arma = getArmaValida()    
 		if not arma or not evento then return end    
 
@@ -772,8 +776,8 @@ tfe = survival:AddToggle("", {
         if tf then
             task.spawn(function()
                 while tf do
-                    task.wait(0.25)
-                    if wiki(c) < 1 then tfe:SetValue(false) notifeed(c) break end
+                    task.wait(0.075)
+                    if wiki(c) == 0 then tfe:SetValue(false) notifeed(c) break end
                     if ghn() <= vf then feed(c) end
                 end
             end)
