@@ -702,11 +702,11 @@ survival:AddParagraph({
 	Title = "Tou jaja criando o auto feed 😒😒 correção 1"
 	})
 
-
+function wiki(nome) local c=0; for _,i in ipairs(workspace.Items:GetChildren()) do if i.Name==nome then c=c+1 end end; return c end
 function ghn() return math.floor(game:GetService("Players").LocalPlayer.PlayerGui.Interface.StatBars.HungerBar.Bar.Size.X.Scale * 100) end
 function feed(nome) game:GetService("ReplicatedStorage").RemoteEvents.RequestConsumeItem:InvokeServer(workspace.Items[nome]) end
 
-local vf, ife
+local vf, ife, tfe
 local tf = false
 local c = "Carrot"
 
@@ -735,7 +735,7 @@ ife = survival:AddInput("", {
     end
 })
 
-survival:AddToggle("", {
+tfe = survival:AddToggle("", {
     Title = "Ativar auto feed",
     Description = "Auto se explica",
     Default = false,
@@ -745,6 +745,10 @@ survival:AddToggle("", {
             task.spawn(function()
                 while tf do
                     task.wait(0.25)
+                    if tonumber(wiki(c)) < 1 then 
+                        tfe:SetValue(false) 
+                        break 
+                    end
                     if tonumber(ghn()) <= tonumber(vf) then
                         feed(c)
                     end
