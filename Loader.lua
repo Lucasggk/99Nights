@@ -610,3 +610,8 @@ Combat:AddToggle("", {
 		end
 	end
 })
+
+Combat:AddParagraph({
+    Title = "Armas Válidas para Kill Aura",
+    Content = "Old Axe\nGood Axe\nStrong Axe\nSpear\nKatana\nMorningstar"
+})
