@@ -11,7 +11,7 @@ local Fluent = loadstring(game:HttpGet("https://github.com/dawid-scripts/Fluent/
 
 local Window = Fluent:CreateWindow({
     Title = "99 Nights In The Forest |",
-    SubTitle = "by Lucas",
+    SubTitle = "by Lucas | teste",
     TabWidth = 180,
     Size = UDim2.fromOffset(600, 350),
     Acrylic = false,
