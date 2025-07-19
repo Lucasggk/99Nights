@@ -1,11 +1,15 @@
 repeat task.wait() until game:IsLoaded()
 repeat task.wait() until game.Players.LocalPlayer:FindFirstChild("PlayerGui") 
 
-loadstring(game:HttpGet("https://raw.githubusercontent.com/Lucasggk/BlueLock/refs/heads/main/Fix.name.ui.lua"))()
-loadstring(game:HttpGet("https://raw.githubusercontent.com/Lucasggk/99Nights/main/Bring.lua"))()
-loadstring(game:HttpGet("https://raw.githubusercontent.com/Lucasggk/99Nights/main/Bringc.lua"))()
-loadstring(game:HttpGet("https://raw.githubusercontent.com/Lucasggk/99Nights/main/Esp.lua"))()
-loadstring(game:HttpGet("https://raw.githubusercontent.com/Lucasggk/99Nights/refs/heads/main/No%20void.lua"))()
+for _, url in ipairs{
+	"https://raw.githubusercontent.com/Lucasggk/BlueLock/refs/heads/main/Fix.name.ui.lua",
+	"https://raw.githubusercontent.com/Lucasggk/99Nights/main/Bring.lua",
+	"https://raw.githubusercontent.com/Lucasggk/99Nights/main/Bringc.lua",
+	"https://raw.githubusercontent.com/Lucasggk/99Nights/main/Esp.lua",
+	"https://raw.githubusercontent.com/Lucasggk/99Nights/refs/heads/main/No%20void.lua"
+} do
+	loadstring(game:HttpGet(url, true))()
+end
 
 local Fluent = loadstring(game:HttpGet("https://github.com/dawid-scripts/Fluent/releases/latest/download/main.lua"))()
 
