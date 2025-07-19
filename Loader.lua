@@ -592,22 +592,32 @@ esp:AddButton({
 	end
 })
 
-_G.aae = false
+__G.aae = false
+
 esp:AddToggle("", {
     Title = "Auto add esp", 
-    Description = "Mesma função que o button porem adiciona automaticamente aos novos itens e mobs spawnados", 
+    Description = "Adiciona ESP automaticamente aos itens e mobs spawnados",
     Default = false,
-    Callback = function(a) 
+    Callback = function(a)
         _G.aae = a
-        if _G.aae then
+        if a then
             task.spawn(function()
                 while _G.aae do
-                    for _, i in pairs(vde) do
-                        Aesp(i, "item")
+                    local itens = workspace:WaitForChild("Items")
+                    local mobs = workspace:WaitForChild("Characters")
+
+                    for _, obj in ipairs(itens:GetChildren()) do
+                        if table.find(vde, obj.Name) then
+                            Aesp(obj.Name, "item")
+                        end
                     end
-                    for _, m in pairs(vdm) do
-                        Aesp(m, "mob")
+
+                    for _, mob in ipairs(mobs:GetChildren()) do
+                        if table.find(vdm, mob.Name) then
+                            Aesp(mob.Name, "mob")
+                        end
                     end
+
                     task.wait(1)
                 end
             end)
