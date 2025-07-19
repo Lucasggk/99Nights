@@ -528,10 +528,10 @@ esp:AddButton({
 	Title = "Remover esp",
 	Description = " ",
 	Callback = function()
-		for _, i in ipairs(ie) do
+		for _, i in ipairs(vde) do
 			Desp(i)
-			espdown:SetValue("")
-			espdown:SetValues({})
 		end
+		vde = {}
+		espdown:SetValue({})
 	end
 })
