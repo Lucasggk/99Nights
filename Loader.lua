@@ -508,7 +508,7 @@ local espdown = esp:AddDropdown("a", {
    Description = "test",
    Values = ie,
    Multi = true,
-   Default = ie,
+   Default = {},
 })
 
 espdown:OnChanged(function(val)
