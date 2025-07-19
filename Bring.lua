@@ -133,6 +133,11 @@ function bringSteak()
 	bl("Cooked Steak", "Main")
 end	
 	
+function BringMeat()
+	bl("Cooked Steak", "Main")
+	bl("Cooked Morsel", "Meat")
+end
+
 	
 function tpfire()
 	(game.Players.LocalPlayer.Character or game.Players.LocalPlayer.CharacterAdded:Wait()):WaitForChild("HumanoidRootPart").CFrame =
