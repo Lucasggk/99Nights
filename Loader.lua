@@ -7,11 +7,14 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/Lucasggk/99Nights/mai
 loadstring(game:HttpGet("https://raw.githubusercontent.com/Lucasggk/99Nights/main/Esp.lua"))()
 loadstring(game:HttpGet("https://raw.githubusercontent.com/Lucasggk/99Nights/refs/heads/main/No%20void.lua"))()
 
+local xac = {
+	Vers = "1"
+
 local Fluent = loadstring(game:HttpGet("https://github.com/dawid-scripts/Fluent/releases/latest/download/main.lua"))()
 
 local Window = Fluent:CreateWindow({
     Title = "99 Nights In The Forest |",
-    SubTitle = "by Lucas | teste",
+    SubTitle = "by Lucas | ".. Extra,
     TabWidth = 180,
     Size = UDim2.fromOffset(600, 350),
     Acrylic = false,
@@ -746,12 +749,10 @@ local alimentos = {
     "Carrot",
     "Cake",
     "Chili",
-    "Stew",
     "Cooked Morsel",
-    "Cooked Steak",
-    "Spice"
+    "Cooked Steak"
 }
-local c = ""
+local c = "Carrot"
 
 survival:AddSection("Auto feed")
 
@@ -760,7 +761,7 @@ survival:AddDropdown("", {
     Description = "Selecione o alimento para auto feed",
     Values = alimentos,
     Multi = false,
-    Default = "Carrot",
+    Default = c,
     Callback = function(value)
         c = value
     end
