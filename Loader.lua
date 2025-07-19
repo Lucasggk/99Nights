@@ -699,7 +699,7 @@ Combat:AddParagraph({
 --
 
 survival:AddParagraph({
-	Title = "Tou jaja criando o auto feed 😒😒"
+	Title = "Tou jaja criando o auto feed 😒😒 correção 1"
 	})
 
 
@@ -727,9 +727,9 @@ ife = survival:AddInput("", {
     Finished = false, 
     Callback = function(Value)
         vf = Value
-        if Value < 0 then
+        if tonumber(Value) < 0 then
             ife:SetValue(1)
-        elseif Value > 100 then
+        elseif tonumber(Value) > 100 then
             ife:SetValue(100)
         end 
     end
