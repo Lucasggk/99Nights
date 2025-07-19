@@ -318,6 +318,7 @@ local itens = {
     "Chair",
     "Coal",
     "Morsel (Cooked & Normal)",
+    "Steak (Cooked & Normal)",
     "Coin Stack",
     "Fuel Canister",
     "Iron Body",
@@ -408,6 +409,8 @@ bring:AddButton({
 	    bringMChair()
 	elseif selectedItem == "Morsel (Cooked & Normal)" then
 	    bringMorse()
+	elseif selectedItem == "Steak (Cooked & Normal)" then
+	    bringSteak()
         end
     end
 })
@@ -721,12 +724,14 @@ local alimentos = {
 }
 local c = ""
 
+survival:AddSection("Auto feed")
+
 survival:AddDropdown("", {
     Title = "Escolha a comida",
     Description = "Selecione o alimento para auto feed",
     Values = alimentos,
     Multi = false,
-    Default = nil,
+    Default = "Carrot",
     Callback = function(value) c = value end
 })
 
@@ -771,3 +776,5 @@ tfe = survival:AddToggle("", {
         end
     end
 })
+
+Survival:AddSection("Auto Cook meat")
