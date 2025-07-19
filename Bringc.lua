@@ -16,6 +16,16 @@ function blm(nome, caminho, pos)
 			if obj and obj:IsA("BasePart") then
 				obj.Anchored = true
 				obj.CFrame = CFrame.new(destino)
+
+				task.spawn(function()
+					while obj and obj.Parent and obj.Anchored do
+						task.wait(0.1)
+						if (obj.Position - destino).Magnitude > 1 then
+							obj.Anchored = false
+							break
+						end
+					end
+				end)
 			end
 		end
 	end
