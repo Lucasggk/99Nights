@@ -872,24 +872,30 @@ tfe = survival:AddToggle("", {
 survival:AddSection("Auto Cook meat")
 
 local acm
+local aguardando = false
+
 acm = survival:AddButton({
     Title = "Cozinhar Carnes",
     Description = "Após clicar, ele cozinha as carnes e após 5 segundos teleporta elas para você",
     Callback = function()
+        if aguardando then return end
+        aguardando = true
+
         local ini = os.time() + 5
 
         task.spawn(function()
             while os.time() < ini do
                 local t = ini - os.time()
                 acm:SetDesc("Espere: " .. t .. " segundos para usar novamente")
-                task.wait(0.5)
+                task.wait(0.1)
             end
 
             blmMeat()
-            task.wait(5)
+            task.wait(4.5)
             BringMeat()
 
             acm:SetDesc("Após clicar, ele cozinha as carnes e após 5 segundos teleporta elas para você")
+            aguardando = false
         end)
     end
 })
