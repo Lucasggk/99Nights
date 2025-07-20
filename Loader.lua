@@ -15,7 +15,7 @@ local Fluent = loadstring(game:HttpGet("https://github.com/dawid-scripts/Fluent/
 
 local Window = Fluent:CreateWindow({
     Title = "99 Nights In The Forest |",
-    SubTitle = "by Lucas | 1.5.4",
+    SubTitle = "by Lucas | 1.5.5",
     TabWidth = 180,
     Size = UDim2.fromOffset(600, 350),
     Acrylic = false,
@@ -490,8 +490,6 @@ tps:AddButton({
 	end
 })
 
-
-
 tps:AddButton({
 	Title = "Teleport to Stronghold",
 	Description = "Ao clicar te Teleporta para a fortaleza\nCaso ela já esteja Spawnada*",
@@ -501,6 +499,13 @@ tps:AddButton({
 	end
 })
 
+tps:AddButton({
+	Title = "Teleport to Disco voador",
+	Description = "Ao clicar Teleporta para o Disco voador",
+	Callback = function()
+		game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(workspace.Items["Alien Chest"].Main.CFrame.Position + Vector3.new(0, 10, 0))
+	end
+})
 
 
 
