@@ -490,6 +490,14 @@ tps:AddButton({
 	end
 })
 
+tps:AddButton({
+	Title = "Teleport to Stronghold",
+	Description = "Ao clicar te Teleporta para a fortaleza\nCaso ela ja esteja Spawnada*",
+	Callback = function() 
+		game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(workspace.Map.Landmarks.Stronghold.Building.Exterior:GetChildren()[12].Model.Part.Position + Vector3.new(0, 15, 0))
+	end
+})
+
 
 tps:AddSection("Tps Pos")
 
