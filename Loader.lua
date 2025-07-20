@@ -505,7 +505,7 @@ function strong()
 end
 
 task.spawn(function()
-	while task.wait(1) do
+	while true do task.wait(0.5)
 		local exterior = workspace.Map.Landmarks.Stronghold.Building.Exterior
 		if exterior and exterior:GetChildren()[12] then
 			local target = exterior:GetChildren()[12]
