@@ -578,7 +578,7 @@ tps:AddButton({
 --
 
 local ie = {"Bandage", "Bolt", "Broken Fan", "Broken Microwave", "Cake", "Carrot", "Chair", "Coal", "Coin Stack", "Cooked Morsel", "Cooked Steak", "Fuel Canister", "Iron Body", "Leather Armor", "Log", "MadKit", "Metal Chair", "MedKit", "Old Car Engine", "Old Flashlight", "Old Radio", "Revolver", "Revolver Ammo", "Rifle", "Rifle Ammo", "Morsel", "Sheet Metal", "Steak", "Tyre", "Washing Machine"}
-local me = {"Bunny", "Wolf", "Alpha Wolf", "Bear"}
+local me = {"Bunny", "Wolf", "Alpha Wolf", "Bear", "Cultist", "Crossbow Cultist"}
 
 local vde = {}
 local vdm = {}
