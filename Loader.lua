@@ -498,7 +498,14 @@ tps:AddButton({
 	Description = "Ao clicar te Teleporta para a fortaleza\nCaso ela já esteja Spawnada*",
 	Callback = function()
 		print("Botão teleport criado!")
+		if workspace.Map.Landmarks.Stronghold.Building.Exterior then 
 		game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(workspace.Map.Landmarks.Stronghold.Building.Exterior:GetChildren()[12].Model.Part.Position + Vector3.new(0, 15, 0))
+		else
+                Fluent:Notify({
+                Title = "Stronghold não esta spawnada",
+                Content = "StrongHold não spawnada, desbloqueie mais partes do mapa",
+                Duration = 5
+})
 	end
 })
 
