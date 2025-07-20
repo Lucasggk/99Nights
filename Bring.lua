@@ -139,10 +139,10 @@ function BringMeat()
 end
 
 function bringFerr()
-	bl("Good Axe", "")
-	bl("Strong Axe", "")
-	bl("Good Sack", "")
-	bl("Giant Sack", "")
+	bl("Good Axe", "Main")
+	bl("Strong Axe", "Main")
+	bl("Good Sack", "Sack")
+	bl("Giant Sack", "Sack")
 end
 
 
