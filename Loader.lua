@@ -795,8 +795,7 @@ function ghn()
 end
 
 function feed(nome)
-    local items = workspace.Items:GetChildren()
-    for _, item in ipairs(items) do
+    for _, item in ipairs(workspace.Items:GetChildren()) do
         if item.Name == nome then
             game:GetService("ReplicatedStorage").RemoteEvents.RequestConsumeItem:InvokeServer(item)
             break
@@ -825,6 +824,7 @@ local alimentos = {
 }
 local c = "Carrot"
 vf = 75
+
 survival:AddSection("Auto feed")
 survival:AddDropdown("", {
     Title = "Escolha a comida",
@@ -836,6 +836,7 @@ survival:AddDropdown("", {
         c = value
     end
 })
+
 task.spawn(function()
     local a = survival:AddParagraph({ Title = "fome:", Content = ghn() })
     local b = survival:AddParagraph({ Title = "Comida selecionada:", Content = c })
@@ -845,6 +846,7 @@ task.spawn(function()
         b:SetDesc(c)
     end
 end)
+
 ife = survival:AddInput("", {
     Title = "Feed %",
     Description = "Quando fome atingir (X%) Comer",
@@ -863,6 +865,7 @@ ife = survival:AddInput("", {
         end
     end
 })
+
 tfe = survival:AddToggle("", {
     Title = "Ativar auto feed",
     Description = "Auto se explica",
@@ -871,7 +874,6 @@ tfe = survival:AddToggle("", {
         tf = v
         if tf then
             task.spawn(function()
-                local fomeAnterior = 100
                 while tf do
                     task.wait(0.075)
                     if wiki(c) == 0 then
@@ -879,11 +881,9 @@ tfe = survival:AddToggle("", {
                         notifeed(c)
                         break
                     end
-                    local fomeAtual = ghn()
-                    if fomeAtual <= vf and fomeAtual < fomeAnterior then
+                    if ghn() <= vf then
                         feed(c)
                     end
-                    fomeAnterior = fomeAtual
                 end
             end)
         end
