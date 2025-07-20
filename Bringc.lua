@@ -45,6 +45,8 @@ end
 
 	
 function blmMeat()
-	blm("Steak", "Main", "-0, 7, 0", 0)
-	blm("Morsel", "Meat", "-0, 7, 0", 0)
+	blm("Steak", "Main", "-0, 6.5, 0", 0)
+	blm("Morsel", "Meat", "-0, 6.5, 0", 0)
+	task.wait(0.1)
+	blm("Morsel", "Meat", "-0, 6.35, 0", 0)
 end
