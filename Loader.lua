@@ -318,6 +318,7 @@ local itens = {
     "Broken Fan",
     "Broken Microwave",
     "Cake",
+    "Sack + Axe (Qualidade: Good+)",
     "Carrot",
     "Chair",
     "Coal",
@@ -415,6 +416,8 @@ bring:AddButton({
 	    bringMorse()
 	elseif selectedItem == "Steak (Cooked & Normal)" then
 	    bringSteak()
+	elseif selectedItem == "Sack + Axe (Qualidade: Good+)" then
+	    bringFerr()
         end
     end
 })
