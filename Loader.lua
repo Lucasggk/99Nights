@@ -15,7 +15,7 @@ local Fluent = loadstring(game:HttpGet("https://github.com/dawid-scripts/Fluent/
 
 local Window = Fluent:CreateWindow({
     Title = "99 Nights In The Forest |",
-    SubTitle = "by Lucas | 1.5.2",
+    SubTitle = "by Lucas | 1.5.3",
     TabWidth = 180,
     Size = UDim2.fromOffset(600, 350),
     Acrylic = false,
@@ -491,32 +491,39 @@ tps:AddButton({
 })
 
 
-function strong(part)
+local StarterGui = game:GetService("StarterGui")
+
+function strong()
 	tps:AddButton({
 		Title = "Teleport to Stronghold",
 		Description = "Ao clicar te Teleporta para a fortaleza\nCaso ela já esteja Spawnada*",
 		Callback = function()
-			game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(part.Position + Vector3.new(0, 15, 0))
+			print("Botão teleport criado!")
+			game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(workspace.Map.Landmarks.Stronghold.Building.Exterior:GetChildren()[12].Model.Part.Position + Vector3.new(0, 15, 0))
 		end
 	})
 end
 
 task.spawn(function()
 	while task.wait(1) do
-		for _, obj in pairs(workspace.Map.Landmarks.Stronghold.Building.Exterior:GetChildren()) do
-			if obj:FindFirstChild("Model") and obj.Model:FindFirstChild("Part") then
-				Fluent:Notify({
+		local exterior = workspace.Map.Landmarks.Stronghold.Building.Exterior
+		if exterior and exterior:GetChildren()[12] then
+			local target = exterior:GetChildren()[12]
+			if target:FindFirstChild("Model") and target.Model:FindFirstChild("Part") then
+				print("Stronghold encontrada! Criando botão e notificando...")
+
+				StarterGui:SetCore("SendNotification", {
 					Title = "URGENTE!",
-					Content = "StrongHold spawnada! Função Teleport to Stronghold Adicionada!",
+					Text = "StrongHold spawnada! Função Teleport to Stronghold Adicionada!",
 					Duration = 5
 				})
-				strong(obj.Model.Part)
-				return
+
+				strong()
+				break
 			end
 		end
 	end
 end)
-
 
 
 	
