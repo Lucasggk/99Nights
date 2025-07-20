@@ -491,26 +491,28 @@ tps:AddButton({
 })
 
 
-function strong()
+function strong(part)
 	tps:AddButton({
 		Title = "Teleport to Stronghold",
 		Description = "Ao clicar te Teleporta para a fortaleza\nCaso ela já esteja Spawnada*",
 		Callback = function()
-			game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(workspace.Map.Landmarks.Stronghold.Building.Exterior:GetChildren()[12].Model.Part.Position + Vector3.new(0, 15, 0))
+			game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(part.Position + Vector3.new(0, 15, 0))
 		end
 	})
 end
 
 task.spawn(function()
 	while task.wait(1) do
-		if workspace.Map.Landmarks.Stronghold.Building.Exterior:GetChildren()[12].Model.Part then
-			Fluent:Notify({
-				Title = "URGENTE!",
-				Content = "StrongHold spawnada! Função Teleport to Stronghold Adicionada!",
-				Duration = 5
-			})
-			strong()
-			break
+		for _, obj in pairs(workspace.Map.Landmarks.Stronghold.Building.Exterior:GetChildren()) do
+			if obj:FindFirstChild("Model") and obj.Model:FindFirstChild("Part") then
+				Fluent:Notify({
+					Title = "URGENTE!",
+					Content = "StrongHold spawnada! Função Teleport to Stronghold Adicionada!",
+					Duration = 5
+				})
+				strong(obj.Model.Part)
+				return
+			end
 		end
 	end
 end)
