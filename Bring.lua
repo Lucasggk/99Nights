@@ -138,6 +138,15 @@ function BringMeat()
 	bl("Cooked Morsel", "Meat")
 end
 
+function bringFerr()
+	bl("Good Axe", "")
+	bl("Strong Axe", "")
+	bl("Good Sack", "")
+	bl("Giant Sack", "")
+end
+
+
+	
 	
 function tpfire()
 	(game.Players.LocalPlayer.Character or game.Players.LocalPlayer.CharacterAdded:Wait()):WaitForChild("HumanoidRootPart").CFrame =
