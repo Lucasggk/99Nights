@@ -901,3 +901,8 @@ acm = survival:AddButton({
         end)
     end
 })
+
+survival:AddParagraph({
+	Title = "Como usar?",
+	Content = "Na primeira vez ele ira bugar\nComo arrumar?\nQuando voce der o primeiro click no botão\nvá ate a fogueira e clique em uma das carnes\nApos isso elas irão cair e fritar\nA partir deste momento não acontecerá mais o bug :)"
+	})
