@@ -15,7 +15,7 @@ local Fluent = loadstring(game:HttpGet("https://github.com/dawid-scripts/Fluent/
 
 local Window = Fluent:CreateWindow({
     Title = "99 Nights In The Forest |",
-    SubTitle = "by Lucas | 1.5.3",
+    SubTitle = "by Lucas | 1.5.4",
     TabWidth = 180,
     Size = UDim2.fromOffset(600, 350),
     Acrylic = false,
@@ -504,26 +504,11 @@ function strong()
 	})
 end
 
-task.spawn(function()
-	while true do task.wait(0.5)
-		local exterior = workspace.Map.Landmarks.Stronghold.Building.Exterior
-		if exterior and exterior:GetChildren()[12] then
-			local target = exterior:GetChildren()[12]
-			if target:FindFirstChild("Model") and target.Model:FindFirstChild("Part") then
-				print("Stronghold encontrada! Criando botão e notificando...")
+strong()
 
-				StarterGui:SetCore("SendNotification", {
-					Title = "URGENTE!",
-					Text = "StrongHold spawnada! Função Teleport to Stronghold Adicionada!",
-					Duration = 5
-				})
+task.spawn(function() while true do task.wait(0.5) if workspace.Map.Landmarks.Stronghold.Building.Exterior then strong() end end end)
 
-				strong()
-				break
-			end
-		end
-	end
-end)
+
 
 
 	
