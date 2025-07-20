@@ -881,6 +881,8 @@ acm = survival:AddButton({
         if aguardando then return end
         aguardando = true
 
+        blmMeat()
+
         local ini = os.time() + 5
 
         task.spawn(function()
@@ -890,12 +892,12 @@ acm = survival:AddButton({
                 task.wait(0.1)
             end
 
-            blmMeat()
-            task.wait(4.5)
-            BringMeat()
-
             acm:SetDesc("Após clicar, ele cozinha as carnes e após 5 segundos teleporta elas para você")
             aguardando = false
+        end)
+
+        task.delay(5, function()
+            BringMeat()
         end)
     end
 })
