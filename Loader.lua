@@ -202,8 +202,8 @@ player:AddButton({
 local manterVelocidade = false
 
 player:AddToggle("", {
-    Title = "Nunca manter velocidade abaixo de 30",
-    Description = "Caso cair em uma trap velocidade não reduz\n-> Se sua velocidade for menos que 30 ela muda pra 50!",
+    Title = "Nunca manter velocidade abaixo de 100",
+    Description = "Caso cair em uma trap velocidade não reduz\n-> Se sua velocidade for menos que 30 ela muda pra 100!",
     Default = false,
     Callback = function(v)
         manterVelocidade = v
@@ -213,7 +213,7 @@ player:AddToggle("", {
                     local char = game.Players.LocalPlayer.Character
                     local h = char and char:FindFirstChild("Humanoid")
                     if h and h.WalkSpeed < 30 then
-                        h.WalkSpeed = 50
+                        h.WalkSpeed = 100
                     end
                     task.wait(0.1)
                 end
