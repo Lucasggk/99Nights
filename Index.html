@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Key do Dia</title>
+</head>
+<body>
+  <h1>Sua key de hoje:</h1>
+  <h2 id="key" style="color: green;"></h2>
+
+  <script>
+    const hoje = new Date();
+    const dia = String(hoje.getDate()).padStart(2, '0');
+    const mes = String(hoje.getMonth() + 1).padStart(2, '0');
+    const ano = hoje.getFullYear();
+    const key = `LucasKey-${dia}-${mes}-${ano}`;
+    document.getElementById("key").innerText = key;
+  </script>
+</body>
+</html>
