@@ -53,7 +53,6 @@
   <div id="key" title="Clique para copiar a key!"></div>
   <small>(Clique na key para copiar)</small>
   <div id="reset-info">A key reseta todo dia à meia-noite (00:00) no horário UTC.</div>
-  <div id="piru">oi</div>
 
   <script>
     function randomHex(n) {
@@ -80,7 +79,7 @@
       const part3 = randomHex(4);
       const part4 = randomHex(4);
       Math.random = originalRandom;
-      return `LKZh-${part1}-${part2}-${part3}-${part4}`;
+      return `Free: ${part1}-${part2}-${part3}-${part4}`;
     }
 
     const keyDiv = document.getElementById('key');
