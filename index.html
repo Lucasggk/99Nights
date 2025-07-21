@@ -11,11 +11,9 @@
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       display: flex;
       flex-direction: column;
-      justify-content: center;
       align-items: center;
+      margin: 40px 20px 20px 20px;
       height: 100vh;
-      margin: 0;
-      padding: 20px;
       text-align: center;
     }
     h1 {
@@ -32,6 +30,7 @@
       user-select: all;
       cursor: pointer;
       transition: background 0.3s ease;
+      margin-top: 0;
     }
     #key:hover {
       background: #005500;
@@ -47,11 +46,9 @@
   <h1>Sua Key do Dia:</h1>
   <div id="key" title="Clique para copiar a key!"></div>
   <small>(Clique na key para copiar)</small>
-
   <script>
-    // Função para gerar uma string aleatória hex de tamanho n
     function randomHex(n) {
-      const chars = '0123456789abcdefzxk';
+      const chars = '0123456789abcdef';
       let str = '';
       for(let i=0; i<n; i++) {
         str += chars[Math.floor(Math.random() * chars.length)];
@@ -62,7 +59,6 @@
     function gerarKey() {
       const hoje = new Date();
       const seed = hoje.getDate() + hoje.getMonth() + hoje.getFullYear();
-
       const originalRandom = Math.random;
       let s = seed % 2147483647;
       function seededRandom() {
@@ -70,13 +66,10 @@
         return (s - 1) / 2147483646;
       }
       Math.random = seededRandom;
-
       const part1 = randomHex(4);
       const part2 = randomHex(4);
       const part3 = randomHex(2);
-
       Math.random = originalRandom;
-
       return `LKZh-${part1}-${part2}-${part3}`;
     }
 
