@@ -36,20 +36,6 @@
     #key:hover {
       background: #005500;
     }
-    button {
-      margin-top: 20px;
-      background: #00ff7f;
-      border: none;
-      color: #121212;
-      font-size: 1rem;
-      padding: 10px 20px;
-      border-radius: 8px;
-      cursor: pointer;
-      transition: background 0.3s ease;
-    }
-    button:hover {
-      background: #00cc66;
-    }
     small {
       margin-top: 10px;
       color: #666;
@@ -60,7 +46,6 @@
 <body>
   <h1>Sua Key do Dia:</h1>
   <div id="key" title="Clique para copiar a key!"></div>
-  <button onclick="gerarKey()">Gerar nova key</button>
   <small>(Clique na key para copiar)</small>
 
   <script>
@@ -76,47 +61,33 @@
 
     function gerarKey() {
       const hoje = new Date();
-      // Base de seed simples usando dia, mês e ano para gerar partes aleatórias fixas no dia
       const seed = hoje.getDate() + hoje.getMonth() + hoje.getFullYear();
 
-      // Para garantir consistência na key do dia, podemos usar uma função pseudo aleatória simples com a seed
-      // Como exemplo, vamos usar o dia para alterar o Math.random temporariamente
-      // (Nota: para real seed random, bibliotecas externas são necessárias, mas aqui vai um jeito simples)
-
-      // Guardar Math.random original
       const originalRandom = Math.random;
-
-      // Semente pseudo aleatória (Linear congruential generator simples)
       let s = seed % 2147483647;
       function seededRandom() {
         s = (s * 16807) % 2147483647;
         return (s - 1) / 2147483646;
       }
-
       Math.random = seededRandom;
 
-      // Gerar partes da key
       const part1 = randomHex(4);
       const part2 = randomHex(4);
       const part3 = randomHex(2);
 
-      // Restaurar Math.random original
       Math.random = originalRandom;
 
-      const key = `LKZh-${part1}-${part2}-${part3}`;
-      document.getElementById('key').innerText = key;
+      return `LKZh-${part1}-${part2}-${part3}`;
     }
 
-    // Copiar key ao clicar
-    document.getElementById('key').addEventListener('click', () => {
-      const keyText = document.getElementById('key').innerText;
-      navigator.clipboard.writeText(keyText).then(() => {
-        alert(`Key "${keyText}" copiada para a área de transferência!`);
+    const keyDiv = document.getElementById('key');
+    keyDiv.innerText = gerarKey();
+
+    keyDiv.addEventListener('click', () => {
+      navigator.clipboard.writeText(keyDiv.innerText).then(() => {
+        alert(`Key "${keyDiv.innerText}" copiada para a área de transferência!`);
       });
     });
-
-    // Gerar key ao carregar
-    gerarKey();
   </script>
 </body>
 </html>
