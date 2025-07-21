@@ -49,7 +49,7 @@
   </style>
 </head>
 <body>
-  <h1>Sua Key do Dia:</h1>
+  <h1>Your key:</h1>
   <div id="key" title="Clique para copiar a key!"></div>
   <small>(Clique na key para copiar)</small>
   <div id="reset-info">A key reseta todo dia à meia-noite (00:00) no horário UTC.</div>
@@ -90,15 +90,6 @@
         alert(`Key "${keyDiv.innerText}" copiada para a área de transferência!`);
       });
     });
-
-    setTimeout(function () {
-      alert("Tempo expirado! A aba será fechada.");
-      window.open('', '_self', '');
-      window.close();
-      setTimeout(() => {
-        alert("Não foi possível fechar automaticamente. Feche a aba manualmente.");
-      }, 500);
-    }, 0.1 * 60 * 1000);
   </script>
 </body>
 </html>
