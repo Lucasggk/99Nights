@@ -21,7 +21,7 @@
       margin-bottom: 0.5rem;
     }
     #key {
-      font-size: 1.8rem; 
+      font-size: 1.8rem;
       font-weight: bold;
       letter-spacing: 0.2rem;
       background: #003300;
@@ -58,7 +58,7 @@
     function randomHex(n) {
       const chars = '0123456789abcdef';
       let str = '';
-      for(let i=0; i<n; i++) {
+      for (let i = 0; i < n; i++) {
         str += chars[Math.floor(Math.random() * chars.length)];
       }
       return str;
@@ -91,11 +91,14 @@
       });
     });
 
-    // Redireciona após 5 minutos
     setTimeout(function () {
-      alert("Tempo expirado! A página será fechada para segurança.");
-      window.location.href = "expirado.html"; // Substitua se quiser
-    }, 0.5 * 60 * 1000);
+      alert("Tempo expirado! A aba será fechada.");
+      window.open('', '_self', '');
+      window.close();
+      setTimeout(() => {
+        alert("Não foi possível fechar automaticamente. Feche a aba manualmente.");
+      }, 500);
+    }, 0.1 * 60 * 1000);
   </script>
 </body>
 </html>
