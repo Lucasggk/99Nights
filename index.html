@@ -1,19 +1,122 @@
 <!DOCTYPE html>
-<html>
+<html lang="pt-BR">
 <head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Key do Dia</title>
+  <style>
+    body {
+      background: #121212;
+      color: #00ff7f;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      padding: 20px;
+      text-align: center;
+    }
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: 0.5rem;
+    }
+    #key {
+      font-size: 2rem;
+      font-weight: bold;
+      letter-spacing: 0.2rem;
+      background: #003300;
+      padding: 15px 25px;
+      border-radius: 10px;
+      user-select: all;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+    #key:hover {
+      background: #005500;
+    }
+    button {
+      margin-top: 20px;
+      background: #00ff7f;
+      border: none;
+      color: #121212;
+      font-size: 1rem;
+      padding: 10px 20px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+    button:hover {
+      background: #00cc66;
+    }
+    small {
+      margin-top: 10px;
+      color: #666;
+      font-size: 0.9rem;
+    }
+  </style>
 </head>
 <body>
-  <h1>Sua key de hoje:</h1>
-  <h2 id="key" style="color: green;"></h2>
+  <h1>Sua Key do Dia:</h1>
+  <div id="key" title="Clique para copiar a key!"></div>
+  <button onclick="gerarKey()">Gerar nova key</button>
+  <small>(Clique na key para copiar)</small>
 
   <script>
-    const hoje = new Date();
-    const dia = String(hoje.getDate()).padStart(2, '0');
-    const mes = String(hoje.getMonth() + 1).padStart(2, '0');
-    const ano = hoje.getFullYear();
-    const key = `LucasKey-${dia}-${mes}-${ano}`;
-    document.getElementById("key").innerText = key;
+    // Função para gerar uma string aleatória hex de tamanho n
+    function randomHex(n) {
+      const chars = '0123456789abcdef';
+      let str = '';
+      for(let i=0; i<n; i++) {
+        str += chars[Math.floor(Math.random() * chars.length)];
+      }
+      return str;
+    }
+
+    function gerarKey() {
+      const hoje = new Date();
+      // Base de seed simples usando dia, mês e ano para gerar partes aleatórias fixas no dia
+      const seed = hoje.getDate() + hoje.getMonth() + hoje.getFullYear();
+
+      // Para garantir consistência na key do dia, podemos usar uma função pseudo aleatória simples com a seed
+      // Como exemplo, vamos usar o dia para alterar o Math.random temporariamente
+      // (Nota: para real seed random, bibliotecas externas são necessárias, mas aqui vai um jeito simples)
+
+      // Guardar Math.random original
+      const originalRandom = Math.random;
+
+      // Semente pseudo aleatória (Linear congruential generator simples)
+      let s = seed % 2147483647;
+      function seededRandom() {
+        s = (s * 16807) % 2147483647;
+        return (s - 1) / 2147483646;
+      }
+
+      Math.random = seededRandom;
+
+      // Gerar partes da key
+      const part1 = randomHex(4);
+      const part2 = randomHex(4);
+      const part3 = randomHex(2);
+
+      // Restaurar Math.random original
+      Math.random = originalRandom;
+
+      const key = `LKZh-${part1}-${part2}-${part3}`;
+      document.getElementById('key').innerText = key;
+    }
+
+    // Copiar key ao clicar
+    document.getElementById('key').addEventListener('click', () => {
+      const keyText = document.getElementById('key').innerText;
+      navigator.clipboard.writeText(keyText).then(() => {
+        alert(`Key "${keyText}" copiada para a área de transferência!`);
+      });
+    });
+
+    // Gerar key ao carregar
+    gerarKey();
   </script>
 </body>
 </html>
