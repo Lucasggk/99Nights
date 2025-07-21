@@ -558,7 +558,7 @@ tps:AddButton({
     Callback = function()
 	table.clear(tv)
         Dropdown:SetValues(tv)
-	Dropdown:SetValue(tv)
+	Dropdown:SetValue("")
     end
 })
 
