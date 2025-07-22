@@ -52,12 +52,6 @@
       color: #666;
       font-size: 0.9rem;
     }
-    #views-container,
-    #ip-container {
-      color: #00ff7f;
-      margin-top: 10px;
-      font-size: 1.1rem;
-    }
   </style>
 </head>
 <body>
@@ -66,8 +60,6 @@
   <small>(Clique na key para copiar)</small>
   <div id="reset-info">A key reseta todo dia à meia-noite (00:00) no horário UTC.</div>
   <div id="author" title="Made by Lucas">Made by Lucas</div>
-  <div id="views-container">Views: <span id="views">carregando...</span></div>
-  <div id="ip-container">Seu IP: <span id="ip">carregando...</span></div>
 
   <script>
     function randomHex(n) {
@@ -104,21 +96,6 @@
         alert(`Key "${keyDiv.innerText}" copiada para a área de transferência!`);
       });
     });
-
-    fetch("https://api.countapi.xyz/hit/lucas-key-generator/site")
-      .then(res => res.json())
-      .then(data => {
-        document.getElementById("views").innerText = data.value;
-      });
-
-    fetch("https://ipinfo.io/json?token=ce4c7d5737f3d9")
-      .then(res => res.json())
-      .then(data => {
-        document.getElementById("ip").innerText = data.ip;
-      })
-      .catch(() => {
-        document.getElementById("ip").innerText = "erro ao obter IP";
-      });
   </script>
 </body>
 </html>
