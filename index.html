@@ -103,11 +103,14 @@
       });
     });
 
-    fetch("https://api.countapi.xyz/hit/lucas-key-generator/site")
-      .then(res => res.json())
-      .then(data => {
-        document.getElementById("views").innerText = data.value;
-      });
+fetch("https://ipinfo.io/json?token=ce4c7d5737f3d9")
+  .then(res => res.json())
+  .then(data => {
+    document.getElementById("ip").innerText = data.ip;
+  })
+  .catch(() => {
+    document.getElementById("ip").innerText = "erro ao obter IP";
+  });
   </script>
 </body>
 </html>
