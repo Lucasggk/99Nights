@@ -27,4 +27,4 @@ local function gerarKey()
     return string.format("LKZh-%s-%s-%s-%s", part1, part2, part3, part4)
 end
 
-print(gerarKey())
+return gerarKey()
