@@ -1,4 +1,4 @@
-local key = loadstring(game:HttpGet("https://seurepositorio.com/keysystem.lua"))()
+local key = loadstring(game:HttpGet("https://raw.githubusercontent.com/Lucasggk/99Nights/main/Key/GerKey.lua"))()
 local getKeyLink = "https://lucasggk.github.io/99Nights/"
 local exec = ""
 
