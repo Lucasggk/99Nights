@@ -1,6 +1,6 @@
 local key = loadstring(game:HttpGet("https://raw.githubusercontent.com/Lucasggk/99Nights/main/Key/GerKey.lua"))()
 local getKeyLink = "https://lucasggk.github.io/99Nights/"
-local exec = ""
+local exec = "https://raw.githubusercontent.com/Lucasggk/99Nights/main/Loader.lua"
 
 local Players = game:GetService("Players")
 local LocalPlayer = Players.LocalPlayer
