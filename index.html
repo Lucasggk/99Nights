@@ -52,6 +52,11 @@
       color: #666;
       font-size: 0.9rem;
     }
+    #views-container {
+      color: #00ff7f;
+      margin-top: 10px;
+      font-size: 1.1rem;
+    }
   </style>
 </head>
 <body>
@@ -60,6 +65,7 @@
   <small>(Clique na key para copiar)</small>
   <div id="reset-info">A key reseta todo dia à meia-noite (00:00) no horário UTC.</div>
   <div id="author" title="Made by Lucas">Made by Lucas</div>
+  <div id="views-container">Views: <span id="views">carregando...</span></div>
 
   <script>
     function randomHex(n) {
@@ -84,7 +90,7 @@
       const part2 = randomHex(4);
       const part3 = randomHex(4);
       const part4 = randomHex(4);
-      Math.random = Math.random; 
+      Math.random = Math.random;
       return `LKZh-${part1}-${part2}-${part3}-${part4}`;
     }
 
@@ -96,6 +102,12 @@
         alert(`Key "${keyDiv.innerText}" copiada para a área de transferência!`);
       });
     });
+
+    fetch("https://api.countapi.xyz/hit/lucas-key-generator/site")
+      .then(res => res.json())
+      .then(data => {
+        document.getElementById("views").innerText = data.value;
+      });
   </script>
 </body>
 </html>
