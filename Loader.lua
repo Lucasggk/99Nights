@@ -557,8 +557,8 @@ tps:AddButton({
     Description = "Limpa todas posições salva no Dropdown",
     Callback = function()
 	table.clear(tv)
-        Dropdown:SetValues(tv)
 	Dropdown:SetValue("")
+        Dropdown:SetValues(tv)
     end
 })
 
@@ -702,7 +702,8 @@ local armasValidas = {
 	["Strong Axe"] = true,    
 	["Spear"] = true,    
 	["Katana"] = true,    
-	["Morningstar"] = true    
+	["Morningstar"] = true,
+	["Laser Sword"] = true
 }    
 
 function getArmaValida()
