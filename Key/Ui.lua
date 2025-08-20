@@ -13,7 +13,6 @@ local function isKeyValid(k)
 	else
 		if k == key then return true end
 	end
-	if k == "LKZh-55a1-1077-4c39-2527" then return true end
 	return false
 end
 
